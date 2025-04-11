@@ -2,34 +2,50 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { BrowserRouter, Route, Routes } from 'react-router'
+import Root from './routes/Root'
+import Cart from './routes/cart/Cart'
+import Order from './routes/cart/order/Order'
+import OrderConfirmed from './routes/cart/order-confirmed/OrderConfirmed'
+import Product from './routes/products/Product'
+import Search from './routes/search/Search'
+import Category from './routes/search/category/Category'
+import Admin from './routes/admin/Admin'
+import NewProduct from './routes/admin/new-product/NewProduct'
+import EditProduct from './routes/admin/edit-product/EditProduct'
+import Orders from './routes/admin/orders/Orders'
+import ViewOrder from './routes/admin/orders/order/ViewOrder'
+import NotFound404 from './routes/404'
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  return <BrowserRouter>
+    <Routes>
+      <Route path='/' >
+        <Route index element={<Root />} />
+        <Route path='cart' >
+          <Route index element={<Cart/>}/>
+          <Route path='order' element={<Order/>}/>
+          <Route path='order-confirmed' element={<OrderConfirmed/>}/>
+        </Route>
+        <Route path='products/:productID' element={<Product/>}/>
+        <Route path='search'>
+          <Route index element={<Search/>}/>
+          <Route path=':category' element={<Category/>}/>
+        </Route>
+        <Route path='admin'>
+          <Route index element={<Admin/>}/>
+          <Route path='new-product' element={<NewProduct/>}/>
+          <Route path='edit-product/:productID' element={<EditProduct/>}/>
+          <Route path='orders' >
+            <Route index element={<Orders/>}/>
+            <Route path=':orderID' element={<ViewOrder/>}/>
+          </Route>
+        </Route>
+        <Route path='*' element={<NotFound404/>}/>
+      </Route>
+      
+    </Routes>
+  </BrowserRouter>
 }
 
 export default App
