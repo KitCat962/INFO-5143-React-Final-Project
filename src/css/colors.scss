@@ -1,0 +1,24 @@
+// So, turns out it is not possible to change a scss variable during runtime, which honestly sucks.
+// So instead we regress back to css variables which do allow for changes at runtime
+// I find that using css variables is the best solution for dark mode, so thats what we do.
+:root {
+    --background: #ddd;
+    --background-text: black;
+    --primary: rgb(66, 120, 221);
+    --primary-text: black;
+    --secondary: #a8ebff;
+    --secondary-text: black;
+    --tertiary: #aaaaaa;
+    --tertiary-text: black;
+
+    @media (prefers-color-scheme: dark) {
+        --background: #242424;
+        --background-text: white;
+        --primary: #490074;
+        --primary-text: white;
+        --secondary: #9b36b9;
+        --secondary-text: white;
+        --tertiary: #4b4b4b;
+        --tertiary-text: white;
+    }
+}

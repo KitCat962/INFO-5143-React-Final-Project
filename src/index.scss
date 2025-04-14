@@ -1,18 +1,39 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@use 'css/colors';
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html,
+body,
+#root {
+  height: 100%;
+  min-height: 100%;
 }
 
+body {
+  color: var(--background-text);
+  background-color: var(--background);
+}
+
+body,
+body * {
+  box-sizing: border-box;
+
+  padding: 0;
+  margin: 0;
+
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  line-height: 1.5;
+  font-weight: 400;
+  vertical-align: baseline;
+
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* 
 a {
   font-weight: 500;
   color: #646cff;
@@ -65,4 +86,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
