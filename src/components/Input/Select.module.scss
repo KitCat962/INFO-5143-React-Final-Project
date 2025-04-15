@@ -1,0 +1,49 @@
+
+.select {
+    display: block;
+    width: 100%;
+
+    .container {
+        flex-direction: row;
+        width: 100%;
+        .input {
+            padding: 0.4em;
+            flex-grow: 3;
+            flex-shrink: 1;
+        }
+        .input::placeholder {
+            color: black;
+        }
+        .button {
+            flex-grow: 1;
+            padding: 0.4em;
+        }
+    }
+
+    .optionlist {
+        display: none;
+        position: absolute;
+        min-width: 10em;
+        width: min-content;
+        max-height: 10em;
+        overflow: visible;
+        overflow-y: scroll;
+        padding: 3px;
+
+        .option {
+            padding: 0.2em;
+            overflow: visible;
+        }
+    }
+}
+
+// .select:has( .button:focus) .optionlist,
+// .select:has(:not(.input:empty)) .optionlist,
+// .select:has( .button:focus) .optionlist,
+// .optionlist:hover,
+// .optionlist:focus,
+// .optionlist:focus-within,
+// .optionlist:has(.option:focus)
+.optionlist.visible {
+    display: flex;
+}

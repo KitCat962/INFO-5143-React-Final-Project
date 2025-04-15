@@ -1,5 +1,5 @@
 import styles from './Admin.module.scss'
-import { Outlet, useLocation, useNavigate, useOutletContext } from 'react-router'
+import { Outlet, useNavigate } from 'react-router'
 import Login from './Login'
 import { useEffect, useState } from 'react'
 import { auth } from '../../scripts/firebase'
@@ -27,10 +27,11 @@ export default function Admin({ }) {
                 <div className={styles.buttons}>
                     <Button onClick={() => navigate('orders')}>Orders?</Button>
                     <Button onClick={() => navigate('products')}>Products?</Button>
-                    <Spacer/>
+                    <Spacer />
                     <Button onClick={() => signOut(auth)} className={styles.logout}>Logout</Button>
                 </div>
                 <Outlet />
             </div> :
-            <Login /> : <Center><Spinner/></Center>
+            <Login /> :
+        <Center><Spinner /></Center>
 }

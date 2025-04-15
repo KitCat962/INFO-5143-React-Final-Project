@@ -2,7 +2,7 @@ import styles from './Text.module.scss'
 import InputBase from './InputBase'
 import { useId } from 'react'
 
-export default function Text({ formName, className, label,  hint, value, onChange, email, password }) {
+export default function Text({ formName, className, label, hint, value, onChange, email, password }) {
     const id = useId()
     const inputId = `${id}-input`
     const hintId = `${id}-hint`

@@ -14,6 +14,7 @@
     &:focus,
     &:focus-visible {
         outline: 4px auto white;
+        z-index: 1;
     }
 }
 

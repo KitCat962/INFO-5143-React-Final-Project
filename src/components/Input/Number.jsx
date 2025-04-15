@@ -31,7 +31,6 @@ export default function Number({ formName, className, label, hint, value, onChan
 
                 min={min}
                 max={max}
-                step={step}
             />
             <div className={styles.buttongroup}>
                 <Button className={styles.squish} onClick={() => handleIncrement(step)}>
