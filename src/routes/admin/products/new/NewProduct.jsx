@@ -1,13 +1,14 @@
 import styles from './NewProduct.module.scss'
 import Center from "../../../../components/Center";
 import { useEffect, useState } from 'react';
-import checkType, { AND, ENUM, NUMBER_ISH, TRIMED_STRING } from '../../../../scripts/formParser.mjs';
+import checkType, { AND, ANY, ENUM, NUMBER_ISH, TRIMED_STRING } from '../../../../scripts/formParser.mjs';
 import Button from '../../../../components/Buttons/Button';
 import { addDoc, collection, doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../../../scripts/firebase';
 import Number from '../../../../components/Input/Number';
 import Text from '../../../../components/Input/Text';
 import Select from '../../../../components/Input/Select';
+import File from '../../../../components/Input/File';
 
 const formInit = {
     productName: '',
@@ -27,19 +28,37 @@ export default function NewProduct({ }) {
         productName: TRIMED_STRING,
         productDescription: TRIMED_STRING,
         productCategory: ENUM(...Object.keys(categories)),
-        productPrice: AND(NUMBER_ISH, v => [v >= 0, Math.floor(v*100)/100]),
-        imageURL: TRIMED_STRING,
+        productPrice: AND(NUMBER_ISH, v => [v >= 0, Math.floor(v * 100) / 100]),
+        image: ANY,
     }
     const handleChange = (value, index) => {
+        console.log(value, index)
         setFormData({
             ...formData,
             [index]: value
         })
     }
     const handleSubmit = async e => {
+        const base64EncodeFile = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = function () {
+                console.log('RESULT', reader.result)
+                resolve(reader.result)
+            }
+            reader.onerror = reject
+            reader.readAsDataURL(file);
+        })
+
         e.preventDefault()
-        const [valid, product] = checkType(productDefinition, formData)
+        const [valid, parsedFormData] = checkType(productDefinition, formData)
         if (!valid) return
+        const base64Image = await base64EncodeFile(parsedFormData.image)
+        console.log(base64Image)
+        const product = {
+            ...parsedFormData,
+            image: base64Image
+        }
+        console.log(product)
         const response = await addDoc(collection(db, 'products'), product)
         setFormData(formInit)
     }
@@ -60,7 +79,7 @@ export default function NewProduct({ }) {
                         .map(([id, label]) => ({ id, label }))
                 }
             />
-            <Text formName='imageURL' label='ImageURL' value={formData.imageURL} onChange={handleChange} />
+            <File formName='image' label='Image' value={formData.image} onChange={handleChange} image />
             <Button submit>Create New Product</Button>
         </form>
     </Center>

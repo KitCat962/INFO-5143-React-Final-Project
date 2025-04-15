@@ -27,6 +27,7 @@ export const ENUM = (...values) => v => {
 }
 
 // Primitives
+export const ANY = v => [v != undefined, v]
 export const NULL = v => [v == undefined, null]
 export const BOOLEAN = typeof true
 export const FLOAT = typeof 0

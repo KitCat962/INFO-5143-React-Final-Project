@@ -32,6 +32,8 @@ body * {
 
   list-style: none;
 
+  image-rendering: pixelated;
+
   display: flex;
   flex-direction: column;
 }
@@ -39,13 +41,16 @@ body * {
 h1 {
   font-size: 2em;
 }
+
 h2 {
   font-size: 1.8em;
 }
 
-.null, .undefined {
+.null,
+.undefined {
   border-color: magenta !important;
 }
+
 /* 
 a {
   font-weight: 500;
