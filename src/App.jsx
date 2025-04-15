@@ -1,4 +1,4 @@
-import './App.scss'
+import styles from './App.module.scss'
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router'
 import Root from './routes/Root'
 import Cart from './routes/cart/Cart'
@@ -20,7 +20,7 @@ import AuthWrapper from './routes/admin/AuthWrapper'
 function App() {
   return <BrowserRouter>
     <Routes>
-      {/* <Route path='/' element={<><Header /><div className='app-container'><Outlet /></div><Footer /></>}> */}
+      {/* <Route path='/' element={<><Header /><div className = {styles.app-container}><Outlet /></div><Footer /></>}> */}
       <Route path='/' element={<><Header /><Outlet /><Footer /></>}>
         <Route index element={<Root />} />
         <Route path='cart' >

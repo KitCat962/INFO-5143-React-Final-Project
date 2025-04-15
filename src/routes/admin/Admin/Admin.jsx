@@ -1,4 +1,4 @@
-import './Admin.scss'
+import styles from './Admin.module.scss'
 import { useOutletContext } from 'react-router'
 import Dashboard from './Dashboard'
 import Login from './Login'

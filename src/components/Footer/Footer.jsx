@@ -1,7 +1,7 @@
-import './Footer.scss'
+import styles from './Footer.module.scss'
 
 export default function Footer({ }) {
-    return <footer className="footer">
-        <span className="title">Footer</span>
+    return <footer className = {styles.footer}>
+        <span className = {styles.title}>Footer</span>
     </footer>
 }

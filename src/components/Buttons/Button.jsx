@@ -1,4 +1,4 @@
-import './Button.scss'
+import styles from './Button.module.scss'
 import checkType, { DEFAULT, ENUM } from '../../scripts/formParser.mjs'
 
 export default function Button({ children, onClick, type, submit, disabled }) {
@@ -9,7 +9,8 @@ export default function Button({ children, onClick, type, submit, disabled }) {
         'positive',
         'negative'
     ), 'primary'), type)
-    return <button type={submit?'submit':'button'} className={`button ${parsedType}`} onClick={onClick} disabled={disabled}>
+    console.log(styles[parsedType])
+    return <button type={submit?'submit':'button'} className={[styles.button, styles[parsedType]].join(' ')} onClick={onClick} disabled={disabled}>
         {children}
     </button>
 }

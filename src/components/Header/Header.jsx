@@ -1,7 +1,7 @@
-import './Header.scss'
+import styles from './Header.module.scss'
 
 export default function Header({}) {
-    return <header className='header'>
-        <span className='title'>Header</span>
+    return <header className = {styles.header}>
+        <span className = {styles.title}>Header</span>
     </header>
 }
