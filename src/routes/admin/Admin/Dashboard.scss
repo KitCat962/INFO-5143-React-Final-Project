@@ -1,0 +1,23 @@
+.dashboard {
+    flex: 1;
+    gap: 0.4em;
+    width: 100%;
+    align-self: center;
+
+    .dashboarddivider {
+        flex:1;
+        flex-direction: row;
+
+        .buttongroup {
+            flex: 1;
+        }
+
+        .producttable {
+            flex: 2;
+            .producttableheader {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+    }
+}

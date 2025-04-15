@@ -1,0 +1,36 @@
+@mixin buttongen($color, $color-text, $accent) {
+    background-color: var($color);
+    color: var($color-text);
+    border-color: color-mix(in srgb, var($color), var($accent) 20%);
+
+    &:hover {
+        border-color: color-mix(in srgb, var($color), var($color-text) 20%);
+    }
+
+    &:active {
+        background-color: color-mix(in srgb, var($color), var($accent) 20%); //var($color-darker);
+    }
+
+    &:focus,
+    &:focus-visible {
+        outline: 4px auto -webkit-focus-ring-color;
+    }
+}
+
+.button {
+    padding: 1rem;
+    font-size: 1.2em;
+    border-width: 0.2rem;
+
+    &.primary {
+        @include buttongen(--primary, --primary-text, --light)
+    }
+
+    &.secondary {
+        @include buttongen(--secondary, --secondary-text, --light)
+    }
+
+    &.tertiary {
+        @include buttongen(--tertiary, --tertiary-text, --light)
+    }
+}

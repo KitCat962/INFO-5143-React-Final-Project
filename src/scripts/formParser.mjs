@@ -21,6 +21,10 @@ export const ARRAY_T = type => AND(ARRAY, v => {
     const vv = v.map(value => checkType(type, value)).filter(([valid, value]) => valid).map(([valid, value]) => value)
     return [vv.length === v.length, vv]
 })
+export const ENUM = (...values) => v => {
+    const value = values.find(value => value === v)
+    return [!!value, value]
+}
 
 // Primitives
 export const NULL = v => [v == undefined, null]

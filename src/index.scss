@@ -9,6 +9,8 @@ body,
 body {
   color: var(--background-text);
   background-color: var(--background);
+  font-size: 1.25rem;
+  font-weight: 400;
 }
 
 body,
@@ -19,11 +21,14 @@ body * {
   margin: 0;
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 1em;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   line-height: 1.5;
-  font-weight: 400;
   vertical-align: baseline;
+
+  border: 0 solid black;
+  border-radius: 0;
 
   list-style: none;
 
@@ -31,7 +36,9 @@ body * {
   flex-direction: column;
 }
 
-
+h1 {
+  font-size: 2em;
+}
 /* 
 a {
   font-weight: 500;
