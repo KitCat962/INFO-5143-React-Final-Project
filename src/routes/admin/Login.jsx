@@ -1,9 +1,10 @@
 import styles from './Login.module.scss'
 import { useState } from "react"
-import Button from "../../../components/Buttons/Button"
+import Button from "../../components/Buttons/Button"
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../../../scripts/firebase'
-import Input from '../../../components/Input/Input'
+import { auth } from '../../scripts/firebase'
+import Center from '../../components/Center'
+import Text from '../../components/Input/Text'
 
 export default function Login({ }) {
     const [email, setEmail] = useState('')
@@ -24,15 +25,15 @@ export default function Login({ }) {
             setLoading(false)
         }
     }
-    return <div className = {styles.login}>
+    return <Center className = {styles.login}>
         <div style={{ flexGrow: 1 }} />
         <h1>Admin Login</h1>
         <form onSubmit={handleSubmit}>
-            <Input name='Email' type='email' value={email} onChange={setEmail}/>
-            <Input name='Password' type='password' value={password} onChange={setPassword}/>
+            <Text name='Email' email value={email} onChange={setEmail}/>
+            <Text name='Password' password value={password} onChange={setPassword}/>
             <Button disabled={loading} submit>Text</Button>
         </form>
         {error && <p className = {styles.errorbox}>Invalid Credentials</p>}
         <div style={{ flexGrow: 1 }} />
-    </div>
+    </Center>
 }

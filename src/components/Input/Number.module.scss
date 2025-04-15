@@ -1,0 +1,22 @@
+.number {
+    flex-direction: row;
+    .value {
+        flex-grow:3;
+        flex-shrink: 1;
+        padding: 0.4em;
+
+        &[type=number] {
+            appearance: textfield;
+        }
+
+        &[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+    }
+    .buttongroup {
+        flex-grow:1;
+        .squish {
+            padding: 0.05em;
+        }
+    }
+}

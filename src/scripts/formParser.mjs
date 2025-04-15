@@ -35,9 +35,20 @@ export const INTEGER = v => [Number.isSafeInteger(v), v]
 export const STRING = typeof ''
 export const ARRAY = v => [Array.isArray(v), v]
 
+// Loosey Primitives
+export const BOOLEAN_ISH = v => [true, !!v]
+export const FLOAT_ISH = v => [true, +v]
+export const NUMBER_ISH = v => [Number.isFinite(Number(v)), Number(v)]
+export const INTEGER_ISH = v => {
+    const parsedInt = parseInt(v, 10)
+    return [!Number.isNaN(parsedInt), parsedInt]
+}
+export const STRING_ISH = v => [true, String(v)]
+
 // Custom Types
 const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
 export const EMAIL = AND(STRING, v => [emailRegex.test(v), v])
+export const TRIMED_STRING = AND(STRING, v => [v.trim().length > 0, v.trim()])
 
 // Magic happens here
 export default function checkType(type, value) {

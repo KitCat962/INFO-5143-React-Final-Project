@@ -1,12 +1,9 @@
 $width-cutoff: 600px;
 
 .login {
-    flex: 1;
     gap: 0.4em;
     width: 60%;
     min-width: $width-cutoff;
-    align-self: center;
-    align-items: center;
     padding: 5em;
 
     @media screen and (width < $width-cutoff) {

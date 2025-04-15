@@ -1,0 +1,10 @@
+.admin {
+    gap: 0.4em;
+    flex:1;
+
+    .buttons {
+        flex-direction: row;
+
+        .logout {}
+    }
+}

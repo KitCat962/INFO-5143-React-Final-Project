@@ -1,5 +1,5 @@
 import styles from './App.module.scss'
-import { BrowserRouter, Outlet, Route, Routes } from 'react-router'
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router'
 import Root from './routes/Root'
 import Cart from './routes/cart/Cart'
 import Order from './routes/cart/order/Order'
@@ -7,15 +7,15 @@ import OrderConfirmed from './routes/cart/order-confirmed/OrderConfirmed'
 import Product from './routes/products/Product'
 import Search from './routes/search/Search'
 import Category from './routes/search/category/Category'
-import Admin from './routes/admin/Admin/Admin'
-import NewProduct from './routes/admin/new-product/NewProduct'
-import EditProduct from './routes/admin/edit-product/EditProduct'
-import Orders from './routes/admin/orders/Orders'
-import ViewOrder from './routes/admin/orders/order/ViewOrder'
+import Admin from './routes/admin/Admin'
+import AdminNewProduct from './routes/admin/products/new/NewProduct'
+import AdminEditProduct from './routes/admin/products/edit/EditProduct'
+import AdminOrders from './routes/admin/orders/Orders'
+import AdminViewOrder from './routes/admin/orders/order/ViewOrder'
 import NotFound404 from './routes/404'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
-import AuthWrapper from './routes/admin/AuthWrapper'
+import AdminProducts from './routes/admin/products/Products'
 
 function App() {
   return <BrowserRouter>
@@ -33,14 +33,17 @@ function App() {
           <Route index element={<Search />} />
           <Route path=':category' element={<Category />} />
         </Route>
-        <Route path='admin' element={<AuthWrapper/>}>
-          <Route index element={<Admin />} />
-          <Route path='new-product' element={<NewProduct />} />
-          <Route path='edit-product/:productID' element={<EditProduct />} />
-          <Route path='orders' >
-            <Route index element={<Orders />} />
-            <Route path=':orderID' element={<ViewOrder />} />
+        <Route path='admin' element={<Admin />}>
+          <Route path='products'>
+            <Route index element={<AdminProducts />} />
+            <Route path='new' element={<AdminNewProduct />} />
+            <Route path='edit/:productID' element={<AdminEditProduct />} />
           </Route>
+          <Route path='orders' >
+            <Route index element={<AdminOrders />} />
+            <Route path=':orderID' element={<AdminViewOrder />} />
+          </Route>
+          <Route path='*' element={<Navigate to='/admin'/>}/>
         </Route>
         <Route path='*' element={<NotFound404 />} />
       </Route>

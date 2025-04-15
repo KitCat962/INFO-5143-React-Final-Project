@@ -1,0 +1,17 @@
+.products {
+    flex: 1;
+    margin: 1em;
+    .header{
+        flex-direction: row;
+        align-items: center;
+        .title {
+            flex:4;
+            font-size: 1.8em;
+        }
+        .newProduct {
+        }
+    }
+    .table {
+        
+    }
+}
