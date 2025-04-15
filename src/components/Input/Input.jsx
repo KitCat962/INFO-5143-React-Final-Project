@@ -1,11 +1,11 @@
 import styles from './Input.module.scss'
 import { useId } from 'react'
 
-export default function Input({ name, type, hint, value, onChange }) {
+export default function Input({ name, type, hint, value, onChange, className }) {
     const id = useId()
     const inputId = `${id}-input`
     const hintId = `${id}-hint`
-    return <div className={styles.input}>
+    return <div className={[styles.input, className].filter(Boolean).join(' ')}>
         <label className={styles.label} htmlFor={inputId}>{name}</label>
         <input
             className={styles.value}

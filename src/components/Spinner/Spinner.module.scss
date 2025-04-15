@@ -1,0 +1,68 @@
+@use 'sass:math';
+
+$radius: 2em;
+$circumference: 2*math.$pi*$radius;
+
+$stroke-width: 0.5em;
+
+$svgsize: $radius * 2 + $stroke-width * 2;
+
+@keyframes rotate {
+    $halfsvgpx: #{math.div($svgsize, 2)};
+
+    from {
+        transform: translate($halfsvgpx, $halfsvgpx) rotateZ(0deg);
+    }
+
+    to {
+        transform: translate($halfsvgpx, $halfsvgpx) rotateZ(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        stroke-dashoffset: $circumference * 0.10
+    }
+
+    to {
+        stroke-dashoffset: $circumference * 0.80;
+    }
+}
+
+.spinner {
+    .curve {
+        r: $radius;
+        fill: transparent;
+        stroke: white;
+        stroke-width: $stroke-width;
+        stroke-linecap: round;
+        stroke-dasharray: $circumference;
+        stroke-dashoffset: $circumference;
+
+        // animation: name duration timing-function delay iteration-count direction fill-mode;
+        animation: rotate 1s linear 0s infinite normal, spin 1s ease 0s infinite alternate;
+
+        // animation-name: spin;
+        // animation-duration: 4s;
+        // animation-iteration-count: infinite;
+        // animation-direction: alternate;
+        // animation-timing-function: ease;
+        &.primary {
+            stroke: var(--primary);
+        }
+
+        &.secondary {
+            stroke: var(--secondary);
+        }
+
+        &.tertiary {
+            stroke: var(--tertiary);
+        }
+    }
+}
+
+:export {
+    radius: $radius;
+    strokeWidth: $stroke-width;
+    svgSize: $svgsize
+}

@@ -39,6 +39,10 @@ body * {
 h1 {
   font-size: 2em;
 }
+
+.null, .undefined {
+  border-color: magenta !important;
+}
 /* 
 a {
   font-weight: 500;

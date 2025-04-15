@@ -1,14 +1,14 @@
-@mixin buttongen($color, $color-text, $accent) {
+@mixin buttongen($color, $color-text) {
     background-color: var($color);
     color: var($color-text);
-    border-color: color-mix(in srgb, var($color), var($accent) 20%);
+    border-color: color-mix(in srgb, var($color), black 20%);
 
     &:hover {
-        border-color: color-mix(in srgb, var($color), var($color-text) 20%);
+        border-color: color-mix(in srgb, var($color), white 20%);
     }
 
     &:active {
-        background-color: color-mix(in srgb, var($color), var($accent) 20%); //var($color-darker);
+        background-color: color-mix(in srgb, var($color), black 20%); //var($color-darker);
     }
 
     &:focus,
@@ -23,14 +23,14 @@
     border-width: 0.2rem;
 
     &.primary {
-        @include buttongen(--primary, --primary-text, --light)
+        @include buttongen(--primary, --primary-text)
     }
 
     &.secondary {
-        @include buttongen(--secondary, --secondary-text, --light)
+        @include buttongen(--secondary, --secondary-text)
     }
 
     &.tertiary {
-        @include buttongen(--tertiary, --tertiary-text, --light)
+        @include buttongen(--tertiary, --tertiary-text)
     }
 }
