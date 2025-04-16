@@ -32,9 +32,10 @@ export default function Select({ formName, className, label, hint, value, onChan
     const handleKeyPress = e => {
         if (e.code === 'Enter') {
             e.preventDefault()
-            if (optionlist.current.childElementCount === 1) {
-                handleClick(options[0])
-            } else if (optionlist.current.childElementCount > 1) {
+            const filtered = filterOptions()
+            if (filtered.length === 1) {
+                handleClick(filtered[0])
+            } else if (filtered.length > 1) {
                 optionlist.current.firstElementChild.firstElementChild.focus()
             }
         } else if (e.code === 'ArrowDown') {
