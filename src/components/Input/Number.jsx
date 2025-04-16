@@ -4,14 +4,14 @@ import styles from './Number.module.scss'
 import InputBase from './InputBase'
 import { useId } from 'react'
 
-export default function Number({ formName, className, label, hint, value, onChange, min, max, step = 1 }) {
+export default function NumberInput({ formName, className, label, hint, value, onChange, min, max, increment = 1, step }) {
     const id = useId()
     const inputId = `${id}-input`
     const hintId = `${id}-hint`
 
     const handleIncrement = increment => {
-        if (value != value) value = 0
-        let newValue = value + increment
+        let newValue = parseFloat(value + increment)
+        if (Number.isNaN(newValue) || !Number.isFinite(newValue)) value = 0
         if (min != null && newValue < min)
             newValue = min
         else if (max != null && newValue > max)
@@ -31,6 +31,7 @@ export default function Number({ formName, className, label, hint, value, onChan
 
                 min={min}
                 max={max}
+                step={step}
             />
             <div className={styles.buttongroup}>
                 <Button className={styles.squish} onClick={() => handleIncrement(step)}>

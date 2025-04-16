@@ -9,6 +9,7 @@ import { collection, deleteDoc, doc, onSnapshot, query, where } from 'firebase/f
 import { db } from '../../../scripts/firebase'
 import Search from '../../../components/Input/Search'
 import Modal from '../../../components/Modal/Modal'
+import Select from '../../../components/Input/Select'
 
 export default function Products({ }) {
     const navigate = useNavigate()
@@ -24,8 +25,8 @@ export default function Products({ }) {
     }, [searchCategory])
     const [categories, setCategories] = useState(null)
     useEffect(() => {
-        return onSnapshot(doc(db, 'product_data/categories'), doc => setCategories(doc.data()))
-    })
+        return onSnapshot(doc(db, 'product_data/categories'), doc => setCategories({ all: 'All', ...doc.data() }))
+    }, [])
     // So, apperently firebase does not allow searching fields by substring?
     // Very frustrating. Guess I gotta do it clientside
     const filterSearch = productArray => searchTerm.trim().length === 0 ? productArray :
@@ -36,11 +37,20 @@ export default function Products({ }) {
         )
 
     const [deleteProduct, setDeleteProduct] = useState(null)
+    useEffect(() => {
+        console.log(deleteProduct)
+    }, [deleteProduct])
+    const handleDelete = () => {
+        if (!deleteProduct)
+            return
+        deleteDoc(doc(db, 'products', deleteProduct.id))
+        setDeleteProduct(null)
+    }
     const renderModal = () => <Modal visible={!!deleteProduct} requestClose={() => setDeleteProduct(null)}>
         <div style={{ padding: '1em', gap: '1em' }}>
             <h2>Are you sure you want to delete {deleteProduct?.name}?</h2>
             <div style={{ flexDirection: 'row', justifyContent: 'end', gap: '0.5em' }}>
-                <Button type='negative' onClick={() => deleteDoc(doc(db, 'products', deleteProduct.id))}>Delete</Button>
+                <Button type='negative' onClick={handleDelete}>Delete</Button>
                 <Button type='tertiary' onClick={() => setDeleteProduct(null)}>Cancel</Button>
             </div>
         </div>
@@ -52,9 +62,15 @@ export default function Products({ }) {
             <div className={styles.header}>
                 <p className={styles.title}>Products</p>
                 <Spacer />
-                <Button className={styles.newProduct} onClick={() => navigate('new')}>
+                <Button onClick={() => navigate('new')}>
                     New Product
                 </Button>
+                <Select
+                    value={searchCategory}
+                    onChange={setSearchCategory}
+                    placeholder='Filter Category'
+                    options={Object.entries(categories ?? {}).map(([id, label]) => ({ id, label }))}
+                />
                 <Search value={searchTerm} onChange={setSearchTerm} />
             </div>
             <div className={styles.table}>
@@ -74,7 +90,7 @@ export default function Products({ }) {
                     <p>{categories?.[product.category] ?? product.category}</p>
                     <p>{product.price}</p>
                     <div>
-                        <img src={product.image} />
+                        <img className={styles.image} src={product.image} />
                     </div>
                     <div>
                         <Button type='secondary' onClick={() => navigate(`edit/${product.id}`)}>Edit</Button>

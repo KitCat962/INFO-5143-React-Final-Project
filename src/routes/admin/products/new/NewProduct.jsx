@@ -5,7 +5,7 @@ import checkType, { AND, ANY, ENUM, NUMBER_ISH, TRIMED_STRING } from '../../../.
 import Button from '../../../../components/Buttons/Button';
 import { addDoc, collection, doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../../../scripts/firebase';
-import Number from '../../../../components/Input/Number';
+import NumberInput from '../../../../components/Input/Number';
 import Text from '../../../../components/Input/Text';
 import Select from '../../../../components/Input/Select';
 import File from '../../../../components/Input/File';
@@ -23,12 +23,13 @@ export default function NewProduct({ }) {
     useEffect(() => {
         return onSnapshot(doc(db, 'product_data', 'categories'), doc => setCategories(doc.data() || {}))
     }, [])
+    const [error, setError] = useState(null)
 
     const productDefinition = {
-        productName: TRIMED_STRING,
-        productDescription: TRIMED_STRING,
-        productCategory: ENUM(...Object.keys(categories)),
-        productPrice: AND(NUMBER_ISH, v => [v >= 0, Math.floor(v * 100) / 100]),
+        name: TRIMED_STRING,
+        description: TRIMED_STRING,
+        category: ENUM(...Object.keys(categories)),
+        price: AND(NUMBER_ISH, v => [v >= 0, Math.floor(v * 100) / 100]),
         image: ANY,
     }
     const handleChange = (value, index) => {
@@ -51,7 +52,18 @@ export default function NewProduct({ }) {
 
         e.preventDefault()
         const [valid, parsedFormData] = checkType(productDefinition, formData)
-        if (!valid) return
+        if (!valid) {
+            if(!parsedFormData.price)
+                setError('Price is invalid')
+            else if(!parsedFormData.category)
+                setError('Category is invalid')
+            else if(!parsedFormData.image)
+                setError('Image is invalid??? Why?')
+            else
+                setError('Something is invalid. I am just as confused as you are')
+            return
+        }
+        setError(null)
         const base64Image = await base64EncodeFile(parsedFormData.image)
         console.log(base64Image)
         const product = {
@@ -67,10 +79,11 @@ export default function NewProduct({ }) {
         <form className={styles.form} onSubmit={handleSubmit}>
             <Text formName='name' label='Product Name' value={formData.name} onChange={handleChange} />
             <Text formName='description' label='Product Description' value={formData.description} onChange={handleChange} />
-            <Number formName='price' label='Product Price' value={formData.price} onChange={handleChange} min={0} />
+            <NumberInput formName='price' label='Product Price' value={formData.price} onChange={handleChange} min={0} step={0.01} />
             <Select
                 formName='category'
                 label='Category'
+                placeholder='Select Category'
                 value={formData.category}
                 onChange={handleChange}
                 options={
@@ -81,6 +94,7 @@ export default function NewProduct({ }) {
             />
             <File formName='image' label='Image' value={formData.image} onChange={handleChange} image />
             <Button submit>Create New Product</Button>
+            {error && <p>{error}</p>}
         </form>
     </Center>
 }

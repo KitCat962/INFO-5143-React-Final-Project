@@ -4,7 +4,7 @@ import { useId, useRef, useState } from 'react'
 import Button from '../Buttons/Button'
 import { FaChevronDown } from 'react-icons/fa'
 
-export default function Select({ formName, className, label, hint, value, onChange, options }) {
+export default function Select({ formName, className, label, placeholder, hint, value, onChange, options }) {
     const id = useId()
     const inputId = `${id}-input`
     const hintId = `${id}-hint`
@@ -78,7 +78,7 @@ export default function Select({ formName, className, label, hint, value, onChan
                     id={inputId}
                     name={formName}
                     type={'text'}
-                    placeholder={options.find(option => option.id === value)?.label ?? options[0]?.label ?? 'Select'}
+                    placeholder={options.find(option => option.id === value)?.label ?? placeholder}
                     value={search}
                     onChange={e => { setSearching(true); setSearch(e.target.value) }}
                     onFocus={e => search && setSearching(true)}
