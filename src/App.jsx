@@ -43,7 +43,7 @@ function App() {
             <Route index element={<AdminOrders />} />
             <Route path=':orderID' element={<AdminViewOrder />} />
           </Route>
-          <Route path='*' element={<Navigate to='/admin'/>}/>
+          <Route path='*' element={<Navigate to='/admin' />} />
         </Route>
         <Route path='*' element={<NotFound404 />} />
       </Route>

@@ -6,11 +6,13 @@
     color: var(--tertiary-text);
     gap: 0.5em;
     border-radius: 0.2em;
+
     .icon {
         font-size: 1.2em;
     }
+
     .text {
-        flex:1;
+        flex: 1;
         background: none;
         border: none;
         padding: 0.2em;

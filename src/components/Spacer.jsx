@@ -1,3 +1,3 @@
-export default function Spacer({size}) {
-    return <div style={{flexGrow:size??1}}/>
+export default function Spacer({ size }) {
+    return <div style={{ flexGrow: size ?? 1 }} />
 }

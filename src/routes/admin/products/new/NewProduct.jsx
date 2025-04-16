@@ -33,7 +33,6 @@ export default function NewProduct({ }) {
         image: ANY,
     }
     const handleChange = (value, index) => {
-        console.log(value, index)
         setFormData({
             ...formData,
             [index]: value
@@ -43,7 +42,7 @@ export default function NewProduct({ }) {
         const base64EncodeFile = file => new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.onloadend = function () {
-                console.log('RESULT', reader.result)
+                // console.log('RESULT', reader.result)
                 resolve(reader.result)
             }
             reader.onerror = reject
@@ -53,11 +52,11 @@ export default function NewProduct({ }) {
         e.preventDefault()
         const [valid, parsedFormData] = checkType(productDefinition, formData)
         if (!valid) {
-            if(!parsedFormData.price)
+            if (!parsedFormData.price)
                 setError('Price is invalid')
-            else if(!parsedFormData.category)
+            else if (!parsedFormData.category)
                 setError('Category is invalid')
-            else if(!parsedFormData.image)
+            else if (!parsedFormData.image)
                 setError('Image is invalid??? Why?')
             else
                 setError('Something is invalid. I am just as confused as you are')
@@ -65,17 +64,15 @@ export default function NewProduct({ }) {
         }
         setError(null)
         const base64Image = await base64EncodeFile(parsedFormData.image)
-        console.log(base64Image)
         const product = {
             ...parsedFormData,
             image: base64Image
         }
-        console.log(product)
         const response = await addDoc(collection(db, 'products'), product)
         setFormData(formInit)
     }
     return <Center className={styles.newProduct}>
-        <h2 className={styles.title}>New Product</h2>
+        <h2>New Product</h2>
         <form className={styles.form} onSubmit={handleSubmit}>
             <Text formName='name' label='Product Name' value={formData.name} onChange={handleChange} />
             <Text formName='description' label='Product Description' value={formData.description} onChange={handleChange} />

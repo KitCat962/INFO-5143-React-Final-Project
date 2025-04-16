@@ -7,14 +7,14 @@ export default function File({ formName, className, label, hint, value, onChange
     const id = useId()
     const inputId = `${id}-input`
     // const hintId = `${id}-hint`
-    
+
     const handleChange = newfile => {
-        if(onChange)
+        if (onChange)
             onChange(newfile, formName)
     }
 
     return <div className={[styles.file, className].filter(Boolean).join(' ')} >
-        <label className={styles.label} htmlFor={inputId}onClick={e=>e.currentTarget.click()}>
+        <label className={styles.label} htmlFor={inputId} onClick={e => e.currentTarget.click()}>
             <div className={styles.divider}>
                 {label}
                 <Button className={styles.squish} >Browse</Button>
@@ -28,8 +28,8 @@ export default function File({ formName, className, label, hint, value, onChange
             id={inputId}
             name={formName}
             type='file'
-            accept={image?'image/*':null}
-            onChange={e=>handleChange(e.target.files[0])}
+            accept={image ? 'image/*' : null}
+            onChange={e => handleChange(e.target.files[0])}
         // aria-describedby={hint && hintId}
         />
     </div>

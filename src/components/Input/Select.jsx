@@ -39,7 +39,7 @@ export default function Select({ formName, className, label, placeholder, hint, 
                 optionlist.current.firstElementChild.firstElementChild.focus()
             }
         } else if (e.code === 'ArrowDown') {
-            if(!searching)
+            if (!searching)
                 setSearching(true)
             e.preventDefault()
             if (optionlist.current.childElementCount >= 1)
@@ -63,7 +63,7 @@ export default function Select({ formName, className, label, placeholder, hint, 
                 target = target.parentElement
             if (target.nextElementSibling)
                 target.nextElementSibling.firstElementChild.focus()
-        } else if(e.code === 'Enter') {
+        } else if (e.code === 'Enter') {
             searchinput.current.focus()
             handleClick(option)
         }

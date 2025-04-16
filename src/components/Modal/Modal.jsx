@@ -6,7 +6,7 @@ import styles from './Modal.module.scss'
 export default function Modal({ visible, requestClose, children }) {
     return <Backdrop visible={visible} requestClose={requestClose}>
         <Center>
-            <div onClick={e=>e.stopPropagation()} className={styles.modal}>
+            <div onClick={e => e.stopPropagation()} className={styles.modal}>
                 {children}
             </div>
         </Center>

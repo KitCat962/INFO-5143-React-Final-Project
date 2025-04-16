@@ -1,4 +1,3 @@
-
 .select {
     display: block;
     width: 100%;
@@ -6,14 +5,17 @@
     .container {
         flex-direction: row;
         width: 100%;
+
         .input {
             padding: 0.4em;
             flex-grow: 3;
             flex-shrink: 1;
         }
+
         .input::placeholder {
             color: black;
         }
+
         .button {
             flex-grow: 1;
             padding: 0.4em;

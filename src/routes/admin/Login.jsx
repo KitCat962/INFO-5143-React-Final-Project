@@ -25,15 +25,15 @@ export default function Login({ }) {
             setLoading(false)
         }
     }
-    return <Center className = {styles.login}>
+    return <Center className={styles.login}>
         <div style={{ flexGrow: 1 }} />
         <h1>Admin Login</h1>
         <form onSubmit={handleSubmit}>
-            <Text name='Email' email value={email} onChange={setEmail}/>
-            <Text name='Password' password value={password} onChange={setPassword}/>
+            <Text name='Email' email value={email} onChange={setEmail} />
+            <Text name='Password' password value={password} onChange={setPassword} />
             <Button disabled={loading} submit>Text</Button>
         </form>
-        {error && <p className = {styles.errorbox}>Invalid Credentials</p>}
+        {error && <p className={styles.errorbox}>Invalid Credentials</p>}
         <div style={{ flexGrow: 1 }} />
     </Center>
 }

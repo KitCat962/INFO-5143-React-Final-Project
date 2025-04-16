@@ -8,7 +8,7 @@ import Button from '../../components/Buttons/Button'
 import Spinner from '../../components/Spinner/Spinner'
 import Spacer from '../../components/Spacer'
 import Center from '../../components/Center'
-import { doc, getDoc, onSnapshot } from 'firebase/firestore'
+import { doc, onSnapshot } from 'firebase/firestore'
 export default function Admin({ }) {
     const navigate = useNavigate()
     const [attemptedAuth, setAttemptedAuth] = useState(false)
@@ -45,7 +45,7 @@ export default function Admin({ }) {
             <Spacer size={4} />
             <h2>Unauthorized</h2>
             <Spacer />
-            <Button onClick={() => signOut(auth)} className={styles.logout}>Logout</Button>
+            <Button onClick={() => signOut(auth)}>Logout</Button>
             <Spacer size={4} />
         </Center>
 
@@ -54,7 +54,7 @@ export default function Admin({ }) {
             <Button onClick={() => navigate('orders')}>Orders?</Button>
             <Button onClick={() => navigate('products')}>Products?</Button>
             <Spacer />
-            <Button onClick={() => signOut(auth)} className={styles.logout}>Logout</Button>
+            <Button onClick={() => signOut(auth)}>Logout</Button>
         </div>
         <Outlet />
     </div>

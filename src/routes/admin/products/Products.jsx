@@ -37,9 +37,6 @@ export default function Products({ }) {
         )
 
     const [deleteProduct, setDeleteProduct] = useState(null)
-    useEffect(() => {
-        console.log(deleteProduct)
-    }, [deleteProduct])
     const handleDelete = () => {
         if (!deleteProduct)
             return

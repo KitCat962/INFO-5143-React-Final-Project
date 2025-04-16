@@ -1,17 +1,21 @@
 .file {
     gap: 0.4em;
-    .label{
+
+    .label {
         gap: 0.4em;
         flex-direction: column;
+
         .divider {
             margin-left: 0.2em;
             flex-direction: row;
             align-items: center;
             gap: 1em;
+
             .squish {
                 padding: 0.4em;
             }
         }
+
         .image {
             background-image: url('../../assets/transparent.png');
             background-repeat: repeat;
@@ -21,6 +25,6 @@
     }
 }
 
-.input{
+.input {
     display: none;
 }
