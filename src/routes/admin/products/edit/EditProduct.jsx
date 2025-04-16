@@ -1,5 +1,8 @@
+import { useParams } from "react-router"
+
 export default function EditProduct({ }) {
+    const {productID} =  useParams()
     return <>
-        <p>EditProduct</p>
+        <p>EditProduct {productID}</p>
     </>
 }

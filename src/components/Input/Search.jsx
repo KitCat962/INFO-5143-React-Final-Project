@@ -1,0 +1,15 @@
+import styles from './Search.module.scss'
+import { FaSearch } from "react-icons/fa";
+
+export default function Search({ className, value, onChange }) {
+    return <label className={[styles.search, className].filter(Boolean).join(' ')}>
+        <FaSearch className={styles.icon} />
+        <input
+            className={styles.text}
+            type="text"
+            placeholder="Search"
+            value={value}
+            onChange={e => onChange(e.target.value)}
+        />
+    </label>
+}

@@ -11,10 +11,10 @@ import Select from '../../../../components/Input/Select';
 import File from '../../../../components/Input/File';
 
 const formInit = {
-    productName: '',
-    productDescription: '',
-    productCategory: '',
-    productPrice: 0,
+    name: '',
+    description: '',
+    category: '',
+    price: 0,
     image: null,
 }
 export default function NewProduct({ }) {
@@ -65,13 +65,13 @@ export default function NewProduct({ }) {
     return <Center className={styles.newProduct}>
         <h2 className={styles.title}>New Product</h2>
         <form className={styles.form} onSubmit={handleSubmit}>
-            <Text formName='productName' label='Product Name' value={formData.productName} onChange={handleChange} />
-            <Text formName='productDescription' label='Product Description' value={formData.productDescription} onChange={handleChange} />
-            <Number formName='productPrice' label='Product Price' value={formData.productPrice} onChange={handleChange} min={0} />
+            <Text formName='name' label='Product Name' value={formData.name} onChange={handleChange} />
+            <Text formName='description' label='Product Description' value={formData.description} onChange={handleChange} />
+            <Number formName='price' label='Product Price' value={formData.price} onChange={handleChange} min={0} />
             <Select
-                formName='productCategory'
+                formName='category'
                 label='Category'
-                value={formData.productCategory}
+                value={formData.category}
                 onChange={handleChange}
                 options={
                     Object.entries(categories)

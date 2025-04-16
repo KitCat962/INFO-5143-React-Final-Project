@@ -19,7 +19,7 @@
 }
 
 .button {
-    padding: 1rem;
+    padding: 0.7em;
     font-size: 1.2em;
     border-width: 0.2rem;
     justify-content: center;
@@ -35,5 +35,13 @@
 
     &.tertiary {
         @include buttongen(--tertiary, --tertiary-text)
+    }
+
+    &.positive {
+        @include buttongen(--positive, --positive-text)
+    }
+
+    &.negative {
+        @include buttongen(--negative, --negative-text)
     }
 }
