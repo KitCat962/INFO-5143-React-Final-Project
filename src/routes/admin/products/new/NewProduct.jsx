@@ -9,6 +9,7 @@ import NumberInput from '../../../../components/Input/Number';
 import Text from '../../../../components/Input/Text';
 import Select from '../../../../components/Input/Select';
 import File from '../../../../components/Input/File';
+import useCategories from '../../../../hooks/useCategories.mjs';
 
 const formInit = {
     name: '',
@@ -19,16 +20,13 @@ const formInit = {
 }
 export default function NewProduct({ }) {
     const [formData, setFormData] = useState(formInit)
-    const [categories, setCategories] = useState({})
-    useEffect(() => {
-        return onSnapshot(doc(db, 'product_data', 'categories'), doc => setCategories(doc.data() || {}))
-    }, [])
+    const categories = useCategories()
     const [error, setError] = useState(null)
 
     const productDefinition = {
         name: TRIMED_STRING,
         description: TRIMED_STRING,
-        category: ENUM(...Object.keys(categories)),
+        category: ENUM(...Object.keys(categories ?? {})),
         price: AND(NUMBER_ISH, v => [v >= 0, Math.floor(v * 100) / 100]),
         image: ANY,
     }
@@ -84,7 +82,7 @@ export default function NewProduct({ }) {
                 value={formData.category}
                 onChange={handleChange}
                 options={
-                    Object.entries(categories)
+                    Object.entries(categories ?? {})
                         .sort((a, b) => a[1] > b[1])
                         .map(([id, label]) => ({ id, label }))
                 }

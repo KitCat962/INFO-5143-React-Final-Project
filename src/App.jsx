@@ -6,7 +6,6 @@ import Order from './routes/cart/order/Order'
 import OrderConfirmed from './routes/cart/order-confirmed/OrderConfirmed'
 import Product from './routes/products/Product'
 import Search from './routes/search/Search'
-import Category from './routes/search/category/Category'
 import Admin from './routes/admin/Admin'
 import AdminNewProduct from './routes/admin/products/new/NewProduct'
 import AdminEditProduct from './routes/admin/products/edit/EditProduct'
@@ -28,10 +27,7 @@ function App() {
           <Route path='order-confirmed' element={<OrderConfirmed />} />
         </Route>
         <Route path='products/:productID' element={<Product />} />
-        <Route path='search'>
-          <Route index element={<Search />} />
-          <Route path=':category' element={<Category />} />
-        </Route>
+        <Route path='search' element={<Search />} />
         <Route path='admin' element={<Admin />}>
           <Route path='products'>
             <Route index element={<AdminProducts />} />

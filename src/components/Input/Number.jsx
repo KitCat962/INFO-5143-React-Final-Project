@@ -4,13 +4,15 @@ import styles from './Number.module.scss'
 import InputBase from './InputBase'
 import { useId } from 'react'
 
-export default function NumberInput({ formName, className, label, hint, value, onChange, min, max, increment = 1, step }) {
+export default function NumberInput({ formName, className, label, hint, value, onChange, min, max, increment = 1, step = 1 }) {
     const id = useId()
     const inputId = `${id}-input`
     const hintId = `${id}-hint`
 
     const handleIncrement = increment => {
-        let newValue = parseFloat(value + increment)
+        console.log(value, increment)
+        let newValue = Math.round((parseFloat(value) + increment) / step) * step
+        console.log(newValue)
         if (Number.isNaN(newValue) || !Number.isFinite(newValue)) value = 0
         if (min != null && newValue < min)
             newValue = min

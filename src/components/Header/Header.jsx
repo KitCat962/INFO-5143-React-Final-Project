@@ -12,7 +12,7 @@ export default function Header({ useCart }) {
             <img className={styles.logo} src={logo} />
             <span className={styles.title}>Website Name</span>
         </div>
-        <Spacer />
+        {/* <Spacer /> */}
         <div className={styles.end}>
             <Search />
             <CartButton useCart={useCart} />

@@ -32,7 +32,7 @@ body * {
 
   list-style: none;
 
-  image-rendering: pixelated;
+  // image-rendering: pixelated;
 
   display: flex;
   flex-direction: column;
@@ -66,6 +66,11 @@ h1 {
 
 h2 {
   font-size: 1.8em;
+}
+
+img {
+  object-fit: scale-down;
+  width: 100%;
 }
 
 .null,

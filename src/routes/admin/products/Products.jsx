@@ -10,23 +10,15 @@ import { db } from '../../../scripts/firebase'
 import Search from '../../../components/Input/Search'
 import Modal from '../../../components/Modal/Modal'
 import Select from '../../../components/Input/Select'
+import useCategories from '../../../hooks/useCategories.mjs'
+import useProducts from '../../../hooks/useProducts.mjs'
 
 export default function Products({ }) {
     const navigate = useNavigate()
     const [searchTerm, setSearchTerm] = useState('')
     const [searchCategory, setSearchCategory] = useState('all')
-    const [products, setProducts] = useState(null)
-    useEffect(() => {
-        const colRef = collection(db, 'products')
-        const q = searchCategory === 'all' ?
-            query(colRef) :
-            query(colRef, where('category', '==', searchCategory))
-        return onSnapshot(q, collection => setProducts(collection.docs.map(doc => ({ id: doc.id, ...doc.data() }))))
-    }, [searchCategory])
-    const [categories, setCategories] = useState(null)
-    useEffect(() => {
-        return onSnapshot(doc(db, 'product_data/categories'), doc => setCategories({ all: 'All', ...doc.data() }))
-    }, [])
+    const products = useProducts({ category: searchCategory })
+    const categories = useCategories(true)
     // So, apperently firebase does not allow searching fields by substring?
     // Very frustrating. Guess I gotta do it clientside
     const filterSearch = productArray => searchTerm.trim().length === 0 ? productArray :

@@ -1,0 +1,21 @@
+.search {
+    flex-direction: row;
+    padding: 1.5em;
+    gap: 1.5em;
+
+    .sidebar {
+        flex-grow: 2;
+        background-color: var(--secondary);
+        color: var(--secondary-text);
+        padding: 1em;
+        gap: 1em;
+        align-self: flex-start;
+    }
+
+    .productlist {
+        flex-grow: 5;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1em;
+    }
+}

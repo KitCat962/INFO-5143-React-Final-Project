@@ -3,6 +3,7 @@
     color: var(--primary-text);
     padding: 1em;
     flex-direction: row;
+    justify-content: space-between;
 
     .start {
         flex-direction: row;
@@ -12,14 +13,12 @@
         cursor: pointer;
 
         .logo {
-            image-rendering: auto;
+            width: unset;
             height: 1.5em;
             aspect-ratio: 1;
-            object-fit: contain;
         }
 
         .title {
-            // flex: 1;
             font-weight: 700;
         }
     }
