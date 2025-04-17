@@ -1,0 +1,48 @@
+.cart {
+    padding: 2em;
+    gap: 2em;
+
+    .header {
+        background-color: var(--primary);
+        color: var(--primary-text);
+        padding: 1em 2em;
+
+        .title {}
+    }
+
+    .divider {
+        flex-direction: row;
+        gap: 2em;
+
+        .productlist {
+            flex: 4;
+            gap: 2em;
+        }
+
+        .side {
+            flex: 1;
+            align-self: flex-start;
+            background-color: var(--secondary);
+            color: var(--secondary-text);
+            padding: 2em;
+
+            gap: 2em;
+
+            .subtotal {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1em;
+
+                .label {
+
+                    font-size: 1.5em;
+                }
+
+                .price {
+                    font-size: 3em;
+                }
+            }
+        }
+    }
+}

@@ -8,6 +8,7 @@ export default function HeaderFooter() {
     const setProduct = (id, count) => {
         if (!id) throw 'Cart (setProduct): Missing id'
         if (!id) throw 'Cart (setProduct): Missing count'
+        count = parseInt(count, 10)
         const cartproductIndex = cart.findIndex(cartproduct => cartproduct.id === id)
         if (cartproductIndex === -1 && count <= 0) return
         if (cartproductIndex === -1 && count > 0) {

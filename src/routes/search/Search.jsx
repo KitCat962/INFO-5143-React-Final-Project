@@ -18,7 +18,7 @@ export default function Search({ }) {
         category = searchParams.get('category'),
         min = searchParams.get('min'),
         max = searchParams.get('max')
-    const products = useProducts({ category, min, max })
+    const [products, productMap] = useProducts({ category, min, max })
     const categories = useCategories(true)
     const handleChange = (value, name) => {
         const newParams = new URLSearchParams({
@@ -53,6 +53,7 @@ export default function Search({ }) {
         </div>
         <div className={styles.productlist}>
             {products && products.map(product => <ProductTile
+                key={product.id}
                 id={product.id}
                 name={product.name}
                 price={product.price}

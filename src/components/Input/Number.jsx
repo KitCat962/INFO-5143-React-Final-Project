@@ -10,9 +10,7 @@ export default function NumberInput({ formName, className, label, hint, value, o
     const hintId = `${id}-hint`
 
     const handleIncrement = increment => {
-        console.log(value, increment)
         let newValue = Math.round((parseFloat(value) + increment) / step) * step
-        console.log(newValue)
         if (Number.isNaN(newValue) || !Number.isFinite(newValue)) value = 0
         if (min != null && newValue < min)
             newValue = min

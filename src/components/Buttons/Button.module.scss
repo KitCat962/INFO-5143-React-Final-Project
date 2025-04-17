@@ -24,24 +24,40 @@
     border-width: 0.2rem;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
     &.primary {
-        @include buttongen(--primary, --primary-text)
+        @include buttongen(--primary, --primary-text);
     }
 
     &.secondary {
-        @include buttongen(--secondary, --secondary-text)
+        @include buttongen(--secondary, --secondary-text);
     }
 
     &.tertiary {
-        @include buttongen(--tertiary, --tertiary-text)
+        @include buttongen(--tertiary, --tertiary-text);
     }
 
     &.positive {
-        @include buttongen(--positive, --positive-text)
+        @include buttongen(--positive, --positive-text);
     }
 
     &.negative {
-        @include buttongen(--negative, --negative-text)
+        @include buttongen(--negative, --negative-text);
+    }
+
+    &:disabled {
+        @include buttongen(--disabled, --disabled-text);
+        cursor: unset;
+
+        &:hover {
+            border-color: color-mix(in srgb, var(--disabled), black 20%);
+            text-decoration: none;
+        }
+
+        &:active {
+            background-color: var(--disabled);
+            text-decoration: none;
+        }
     }
 }

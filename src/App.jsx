@@ -2,8 +2,6 @@ import styles from './App.module.scss'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
 import Root from './routes/Root'
 import Cart from './routes/cart/Cart'
-import Order from './routes/cart/order/Order'
-import OrderConfirmed from './routes/cart/order-confirmed/OrderConfirmed'
 import Product from './routes/products/Product'
 import Search from './routes/search/Search'
 import Admin from './routes/admin/Admin'
@@ -14,6 +12,7 @@ import AdminViewOrder from './routes/admin/orders/order/ViewOrder'
 import NotFound404 from './routes/404'
 import AdminProducts from './routes/admin/products/Products'
 import HeaderFooter from './routes/HeaderFooter'
+import Checkout from './routes/cart/checkout/Checkout'
 
 function App() {
   return <BrowserRouter>
@@ -23,8 +22,7 @@ function App() {
         <Route index element={<Root />} />
         <Route path='cart' >
           <Route index element={<Cart />} />
-          <Route path='order' element={<Order />} />
-          <Route path='order-confirmed' element={<OrderConfirmed />} />
+          <Route path='checkout' element={<Checkout />} />
         </Route>
         <Route path='products/:productID' element={<Product />} />
         <Route path='search' element={<Search />} />

@@ -14,8 +14,11 @@
     --negative: rgb(255, 57, 57);
     --negative-text: black;
 
+    --disabled: #6d6d6d;
+    --disabled-text: #9e9e9e;
+
     --link: var(--primary-text);
-    --link-visited: #ad00c4;
+    --link-visited: var(--primary-text);
     --link-hover: #ad00c4;
     --link-active: var(--primary-text);
 
@@ -31,6 +34,9 @@
 
         --negative: rgb(151, 0, 0);
         --negative-text: white;
+
+        --disabled: #313131;
+        --disabled-text: rgb(85, 85, 85);
 
         --link: var(--primary-text);
         --link-visited: #757575;

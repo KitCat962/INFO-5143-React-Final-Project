@@ -54,9 +54,17 @@ a {
     text-decoration: underline;
   }
 
+  &:hover:has(>*:disabled) {
+    text-decoration: none;
+  }
+
   &:active {
     color: var(--link-active);
     text-decoration: underline;
+  }
+
+  &:active:has(>*:disabled) {
+    text-decoration: none;
   }
 }
 

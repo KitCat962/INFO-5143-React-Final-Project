@@ -17,7 +17,7 @@ export default function Products({ }) {
     const navigate = useNavigate()
     const [searchTerm, setSearchTerm] = useState('')
     const [searchCategory, setSearchCategory] = useState('all')
-    const products = useProducts({ category: searchCategory })
+    const [products, productMap] = useProducts({ category: searchCategory })
     const categories = useCategories(true)
     // So, apperently firebase does not allow searching fields by substring?
     // Very frustrating. Guess I gotta do it clientside
