@@ -5,15 +5,19 @@
     .container {
         flex-direction: row;
         width: 100%;
+        background-color: var(--tertiary);
+        color: var(--tertiary-text);
 
         .input {
+            background-color: var(--tertiary);
+            color: var(--tertiary-text);
             padding: 0.4em;
             flex-grow: 3;
             flex-shrink: 1;
         }
 
         .input::placeholder {
-            color: black;
+            color: var(--tertiary-text);
         }
 
         .button {
