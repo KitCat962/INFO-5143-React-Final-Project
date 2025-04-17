@@ -17,6 +17,7 @@
     .table {
         $color: var(--primary);
         background-color: $color;
+        color: var(--primary-text);
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 

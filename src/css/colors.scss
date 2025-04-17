@@ -2,17 +2,22 @@
 // So instead we regress back to css variables which do allow for changes at runtime
 // I find that using css variables is the best solution for dark mode, so thats what we do.
 :root {
-    --background: #e2e2e2;
+    --background: #d9d9d9;
     --background-text: black;
-    --primary: rgb(66, 120, 221);
-    --primary-text: black;
-    --secondary: #a8ebff;
-    --secondary-text: black;
-    --tertiary: #494949;
-    --tertiary-text: white;
+    --primary: #3385FF;
+    --primary-text: white;
+    --secondary: #6199EE;
+    --secondary-text: white;
+    --tertiary: white;
+    --tertiary-text: black;
 
     --negative: rgb(255, 57, 57);
     --negative-text: black;
+
+    --link: var(--primary-text);
+    --link-visited: #ad00c4;
+    --link-hover: #ad00c4;
+    --link-active: var(--primary-text);
 
     @media (prefers-color-scheme: dark) {
         --background: #242424;
@@ -26,5 +31,10 @@
 
         --negative: rgb(151, 0, 0);
         --negative-text: white;
+
+        --link: var(--primary-text);
+        --link-visited: #757575;
+        --link-hover: #757575;
+        --link-active: var(--primary-text);
     }
 }

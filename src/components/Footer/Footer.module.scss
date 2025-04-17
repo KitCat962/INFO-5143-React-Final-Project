@@ -1,9 +1,19 @@
 .footer {
     background-color: var(--primary);
+    color: var(--primary-text);
     padding: 2em;
     margin-top: auto;
+    align-items: center;
 
-    .title {
-        font-size: 24px;
+    gap: 1em;
+
+    .links {
+        flex-direction: row;
+        gap: 3em
     }
+
+    .copywrite {
+        font-size: 0.8em;
+    }
+
 }

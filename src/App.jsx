@@ -1,5 +1,5 @@
 import styles from './App.module.scss'
-import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
 import Root from './routes/Root'
 import Cart from './routes/cart/Cart'
 import Order from './routes/cart/order/Order'
@@ -13,15 +13,14 @@ import AdminEditProduct from './routes/admin/products/edit/EditProduct'
 import AdminOrders from './routes/admin/orders/Orders'
 import AdminViewOrder from './routes/admin/orders/order/ViewOrder'
 import NotFound404 from './routes/404'
-import Header from './components/Header/Header'
-import Footer from './components/Footer/Footer'
 import AdminProducts from './routes/admin/products/Products'
+import HeaderFooter from './routes/HeaderFooter'
 
 function App() {
   return <BrowserRouter>
     <Routes>
       {/* <Route path='/' element={<><Header /><div className = {styles.app-container}><Outlet /></div><Footer /></>}> */}
-      <Route path='/' element={<><Header /><Outlet /><Footer /></>}>
+      <Route path='/' element={<HeaderFooter />}>
         <Route index element={<Root />} />
         <Route path='cart' >
           <Route index element={<Cart />} />

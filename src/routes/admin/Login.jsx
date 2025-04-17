@@ -31,7 +31,7 @@ export default function Login({ }) {
         <form onSubmit={handleSubmit}>
             <Text name='Email' email value={email} onChange={setEmail} />
             <Text name='Password' password value={password} onChange={setPassword} />
-            <Button disabled={loading} submit>Text</Button>
+            <Button disabled={loading} submit>Login</Button>
         </form>
         {error && <p className={styles.errorbox}>Invalid Credentials</p>}
         <div style={{ flexGrow: 1 }} />

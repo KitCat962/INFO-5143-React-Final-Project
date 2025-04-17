@@ -38,6 +38,28 @@ body * {
   flex-direction: column;
 }
 
+a {
+  &:link {
+    color: var(--link);
+    text-decoration: none;
+  }
+
+  &:visited {
+    color: var(--link-visited);
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: var(--link-active);
+    text-decoration: underline;
+  }
+}
+
 h1 {
   font-size: 2em;
 }

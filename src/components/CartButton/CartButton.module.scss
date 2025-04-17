@@ -1,0 +1,40 @@
+.cart {
+    flex-direction: row;
+    font-size: 1.7em;
+    align-items: center;
+    padding: 0.4em;
+    border-radius: 1em;
+    cursor: pointer;
+
+    .iconbox {
+        font-size: 1.5em;
+
+        .icon {
+            padding: 0.2em;
+        }
+
+        .number {
+            align-self: end;
+            justify-self: start;
+            position: absolute;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            color: var(--secondary-text);
+            text-align: center;
+            font-size: 0.4em;
+            font-weight: 700;
+            width: 1.6em;
+            height: 1.6em;
+        }
+    }
+
+    .label {
+        font-weight: 700;
+        padding: 0.2em;
+    }
+
+    &:hover {
+        outline: 5px solid currentColor;
+        outline-offset: -5px;
+    }
+}

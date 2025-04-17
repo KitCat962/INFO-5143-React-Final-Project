@@ -1,8 +1,32 @@
 .header {
     background-color: var(--primary);
-    padding: 2em;
+    color: var(--primary-text);
+    padding: 1em;
+    flex-direction: row;
 
-    .title {
-        font-size: 24px;
+    .start {
+        flex-direction: row;
+        font-size: 3em;
+        gap: 0.6rem;
+        align-items: center;
+        cursor: pointer;
+
+        .logo {
+            image-rendering: auto;
+            height: 1.5em;
+            aspect-ratio: 1;
+            object-fit: contain;
+        }
+
+        .title {
+            // flex: 1;
+            font-weight: 700;
+        }
+    }
+
+    .end {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.6em;
     }
 }
