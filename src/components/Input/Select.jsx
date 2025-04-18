@@ -4,7 +4,7 @@ import { useId, useRef, useState } from 'react'
 import Button from '../Buttons/Button'
 import { FaChevronDown } from 'react-icons/fa'
 
-export default function Select({ formName, className, label, placeholder, hint, value, onChange, options }) {
+export default function Select({ formName, className, label, placeholder, hint, disabled, value, onChange, invalid, options }) {
     const id = useId()
     const inputId = `${id}-input`
     const hintId = `${id}-hint`
@@ -69,7 +69,7 @@ export default function Select({ formName, className, label, placeholder, hint, 
         }
     }
 
-    return <InputBase id={id} label={label} className={className} hint={hint} >
+    return <InputBase id={id} label={label} className={className} hint={hint} invalid={invalid} >
         <div className={styles.select} onBlur={e => !e.currentTarget.contains(e.relatedTarget) && setSearching(false)}>
             <div className={styles.container}>
                 <input
@@ -78,6 +78,7 @@ export default function Select({ formName, className, label, placeholder, hint, 
                     id={inputId}
                     name={formName}
                     type={'text'}
+                    disabled={disabled}
                     placeholder={options.find(option => option.id === value)?.label ?? placeholder}
                     value={search}
                     onChange={e => { setSearching(true); setSearch(e.target.value) }}
@@ -86,7 +87,7 @@ export default function Select({ formName, className, label, placeholder, hint, 
 
                     aria-describedby={hint && hintId}
                 />
-                <Button className={styles.button} onClick={() => setSearching(!searching)}>
+                <Button className={styles.button} disabled={disabled} onClick={() => setSearching(!searching)}>
                     <FaChevronDown />
                 </Button>
             </div>
@@ -94,6 +95,7 @@ export default function Select({ formName, className, label, placeholder, hint, 
                 {filterOptions().map(option => <div key={option.id} onKeyDown={e => handleKeyPressOption(e, option)}><Option
                     id={option.id}
                     label={option.label}
+                    disabled={disabled}
                     onClick={handleClick}
                 /></div>)}
             </div>
@@ -101,6 +103,6 @@ export default function Select({ formName, className, label, placeholder, hint, 
     </InputBase>
 }
 
-function Option({ id, label, onClick }) {
-    return <Button className={styles.option} onClick={() => onClick({ id, label })}>{label}</Button>
+function Option({ id, label, disabled, onClick }) {
+    return <Button className={styles.option} disabled={disabled} onClick={() => onClick({ id, label })}>{label}</Button>
 }

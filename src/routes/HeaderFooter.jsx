@@ -22,7 +22,8 @@ export default function HeaderFooter() {
         cart[cartproductIndex].count = count
         setCart([...cart])
     }
-    const useCart = [cart, setProduct]
+    const resetCart = () => setCart([])
+    const useCart = [cart, setProduct, resetCart]
     return <>
         <Header useCart={useCart} />
         <Outlet context={{ useCart }} />

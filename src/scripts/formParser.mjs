@@ -63,10 +63,22 @@ export default function checkType(type, value) {
     let validRet = true
     for (let [key, keyType] of Object.entries(type)) {
         const [valid, keyValue] = checkType(keyType, value[key])
-        if (valid)
-            ret[key] = keyValue
-        else
+        ret[key] = keyValue
+        if (!valid)
             validRet = false
     }
     return [validRet, ret]
+}
+
+export function debugType(type, path = '') {
+    if (typeof type === 'string')
+        return DEFAULT(v => [typeof v === type, v], `${path}_invalid`)
+    if (typeof type === 'function')
+        return DEFAULT(type, `${path}_invalid`)
+
+    const deftypeDebug = {}
+    for (let [field, t] of Object.entries(type)) {
+        deftypeDebug[field] = debugType(t, `${path}_${field}`)
+    }
+    return DEFAULT(deftypeDebug, `${path}_null`)
 }

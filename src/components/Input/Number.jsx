@@ -4,7 +4,7 @@ import styles from './Number.module.scss'
 import InputBase from './InputBase'
 import { useId } from 'react'
 
-export default function NumberInput({ formName, className, label, hint, value, onChange, min, max, increment = 1, step = 1 }) {
+export default function NumberInput({ formName, className, label, hint, value, onChange, invalid, min, max, increment = 1, step = 1 }) {
     const id = useId()
     const inputId = `${id}-input`
     const hintId = `${id}-hint`
@@ -18,7 +18,7 @@ export default function NumberInput({ formName, className, label, hint, value, o
             newValue = max
         onChange(newValue, formName)
     }
-    return <InputBase className={className} id={id} label={label} hint={hint} >
+    return <InputBase className={className} id={id} label={label} hint={hint} invalid={invalid}>
         <div className={styles.number}>
             <input
                 className={styles.value}

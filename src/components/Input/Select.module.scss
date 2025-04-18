@@ -14,10 +14,19 @@
             padding: 0.4em;
             flex-grow: 3;
             flex-shrink: 1;
+
+            &:disabled {
+                background-color: var(--disabled);
+                color: var(--disabled-text);
+            }
         }
 
         .input::placeholder {
             color: var(--tertiary-text);
+        }
+
+        .input:disabled::placeholder {
+            color: var(--disabled-text);
         }
 
         .button {
@@ -29,8 +38,8 @@
     .optionlist {
         display: none;
         position: absolute;
-        min-width: 10em;
-        width: min-content;
+        width: max-content;
+        // max-width: 50%;
         max-height: 10em;
         overflow: visible;
         overflow-y: scroll;

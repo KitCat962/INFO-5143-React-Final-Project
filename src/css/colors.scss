@@ -11,6 +11,9 @@
     --tertiary: white;
     --tertiary-text: black;
 
+    --positive: #36f34f;
+    --positive-text: black;
+
     --negative: rgb(255, 57, 57);
     --negative-text: black;
 
@@ -32,6 +35,9 @@
         --tertiary: rgb(224, 224, 224);
         --tertiary-text: black;
 
+        --positive: #007e11;
+        --positive-text: white;
+
         --negative: rgb(151, 0, 0);
         --negative-text: white;
 
@@ -39,7 +45,7 @@
         --disabled-text: rgb(85, 85, 85);
 
         --link: var(--primary-text);
-        --link-visited: #757575;
+        --link-visited: var(--primary-text);
         --link-hover: #757575;
         --link-active: var(--primary-text);
     }

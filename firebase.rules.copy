@@ -2,22 +2,37 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+  
+  	function isSelf(user) {
+    	return request.auth != null && request.auth.uid == user;
+		}
+    function isSelfOrder(order) {
+      return request.auth != null && request.auth.uid == get(/databases/$(database)/documents/orders/$(order)).userUID;
+    }
+  	function isAdmin() {
+    	return request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.admin == true;
+    }
+    function updatingAdminField() {
+			return request.resource.data.diff(resource != null ? resource.data : {}).affectedKeys().hasAny(['admin']);
+		}
+    
     match /users/{user} {
-      allow read: if request.auth != null && 
-      	(request.auth.uid == user || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.admin == true);
-      allow write: if request.auth != null && 
-      	(request.auth.uid == user || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.admin == true) && 
-      	(!request.resource.data.diff(resource != null ? resource.data : {}).affectedKeys().hasAny(['admin']));
+      allow read: if isSelf(user) || isAdmin();
+      allow write: if (isSelf(user) || isAdmin()) && !updatingAdminField();
     }
     match /product_data/{field} {
     	allow read: if true;
-      allow write: if request.auth != null && 
-      	get(/databases/$(database)/documents/users/$(request.auth.uid)).data.admin == true;
+      allow write: if isAdmin();
     }
     match /products/{product} {
     	allow read: if true;
-      allow write: if request.auth != null && 
-      	get(/databases/$(database)/documents/users/$(request.auth.uid)).data.admin == true;
+      allow write: if isAdmin();
+    }
+    match /orders/{order} {
+    	allow read: if isSelfOrder(order) || isAdmin();
+      allow create: if true;
+      allow update: if	isSelfOrder(order) || isAdmin();
+      allow delete: if false;
     }
   }
 }

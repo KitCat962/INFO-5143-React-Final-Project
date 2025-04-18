@@ -20,6 +20,7 @@ export default function Product({ }) {
     const [count, setCount] = useState(1)
     const addToCart = () => {
         setProduct(productID, count)
+        setCount(1)
     }
     if (product === null) return <Center><Spinner /></Center>
     if (product === false) return <Center><div className={styles.noproduct}>

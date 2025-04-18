@@ -20,6 +20,16 @@ export default function Search({ }) {
         max = searchParams.get('max')
     const [products, productMap] = useProducts({ category, min, max })
     const categories = useCategories(true)
+
+    // So, apperently firebase does not allow searching fields by substring?
+    // Very frustrating. Guess I gotta do it clientside
+    const filterSearch = productArray => term.trim().length === 0 ? productArray :
+        productArray.filter(product =>
+            product.id.includes(term) ||
+            product.name.toLowerCase().includes(term.toLowerCase()) ||
+            product.description.toLowerCase().includes(term.toLowerCase())
+        )
+
     const handleChange = (value, name) => {
         const newParams = new URLSearchParams({
             term, category, min, max,
@@ -52,7 +62,7 @@ export default function Search({ }) {
             />
         </div>
         <div className={styles.productlist}>
-            {products && products.map(product => <ProductTile
+            {products && filterSearch(products).map(product => <ProductTile
                 key={product.id}
                 id={product.id}
                 name={product.name}

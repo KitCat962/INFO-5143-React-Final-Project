@@ -1,12 +1,23 @@
 .input {
     gap: 0.4em;
+    min-width: 0;
+    min-width: min-content;
 
     .label {
         margin-left: 0.2em;
+        min-width: fit-content;
     }
 
     .hint {
         // have not used a hint yet. Remember to style it if I actually do
-        background-color: magenta;
+        display: none;
+        background-color: var(--negative);
+        color: var(--negative-text);
+        padding: 0.5em;
+        min-width: min-content;
+
+        &.invalid {
+            display: inherit;
+        }
     }
 }

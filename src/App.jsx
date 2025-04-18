@@ -13,6 +13,7 @@ import NotFound404 from './routes/404'
 import AdminProducts from './routes/admin/products/Products'
 import HeaderFooter from './routes/HeaderFooter'
 import Checkout from './routes/cart/checkout/Checkout'
+import Confirmation from './routes/cart/checkout/confirmation/Confirmation'
 
 function App() {
   return <BrowserRouter>
@@ -22,7 +23,10 @@ function App() {
         <Route index element={<Root />} />
         <Route path='cart' >
           <Route index element={<Cart />} />
-          <Route path='checkout' element={<Checkout />} />
+          <Route path='checkout' >
+            <Route index element={<Checkout />} />
+            <Route path='confirmation' element={<Confirmation />} />
+          </Route>
         </Route>
         <Route path='products/:productID' element={<Product />} />
         <Route path='search' element={<Search />} />

@@ -76,10 +76,19 @@ h2 {
   font-size: 1.8em;
 }
 
+hr {
+  border-color: var(--primary-text);
+  border-width: 1px;
+}
+
 img {
   object-fit: scale-down;
   width: 100%;
   height: auto;
+}
+
+input {
+  min-width: 0;
 }
 
 .null,

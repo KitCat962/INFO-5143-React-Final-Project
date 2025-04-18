@@ -31,7 +31,7 @@ export default function Cart({ }) {
             <div className={styles.side}>
                 <div className={styles.subtotal}>
                     <span className={styles.label}>Subtotal: </span>
-                    {products ? <Dollar className={styles.price}>{calculateSubtotal()}</Dollar> : <Spinner />}
+                    {products ? <Dollar className={styles.price}>{calculateSubtotal().toFixed(2)}</Dollar> : <Spinner />}
                 </div>
                 {cart.length ?
                     <Link to='checkout'><Button>Checkout</Button></Link> :
