@@ -70,10 +70,25 @@ a {
 
 h1 {
   font-size: 2em;
+  gap: 0.5em;
+  flex-direction: row;
 }
 
 h2 {
   font-size: 1.8em;
+  gap: 0.5em;
+  flex-direction: row;
+}
+
+h3 {
+  font-size: 1.2em;
+  gap: 0.5em;
+  flex-direction: row;
+}
+
+p {
+  flex-direction: row;
+  gap: 0.5em;
 }
 
 hr {
