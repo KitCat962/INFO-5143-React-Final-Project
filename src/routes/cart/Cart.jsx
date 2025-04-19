@@ -6,9 +6,11 @@ import useCart from '../../hooks/UseCart.mjs'
 import useProducts from '../../hooks/useProducts.mjs'
 import styles from './Cart.module.scss'
 import CartProduct from './CartProduct/CartProduct'
+import useAuth from '../../hooks/useAuth.mjs'
 
 export default function Cart({ }) {
-    const [cart, setProduct] = useCart()
+    const [user] = useAuth()
+    const [cart, setProduct] = useCart(user)
     const [products, productMap] = useProducts()
 
     const calculateSubtotal = () => cart.reduce(

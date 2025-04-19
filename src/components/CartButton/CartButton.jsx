@@ -1,9 +1,12 @@
 import { FaShoppingCart } from 'react-icons/fa'
 import styles from './CartButton.module.scss'
 import { useNavigate } from 'react-router'
+import useAuth from '../../hooks/useAuth.mjs'
+import useCart from '../../hooks/UseCart.mjs'
 
-export default function CartButton({ useCart }) {
-    const [cart] = useCart
+export default function CartButton({ }) {
+    const [user] = useAuth()
+    const [cart] = useCart(user)
     const navigate = useNavigate()
     const cartCount = () => cart.reduce((sum, { count }) => sum + count, 0)
     return <div className={styles.cart} onClick={() => navigate('/cart')}>

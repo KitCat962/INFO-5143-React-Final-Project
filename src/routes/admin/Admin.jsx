@@ -8,30 +8,13 @@ import Button from '../../components/Buttons/Button'
 import Spinner from '../../components/Spinner/Spinner'
 import Spacer from '../../components/Spacer'
 import Center from '../../components/Center'
-import { doc, onSnapshot } from 'firebase/firestore'
+import useAuth from '../../hooks/useAuth.mjs'
 export default function Admin({ }) {
     const navigate = useNavigate()
-    const [attemptedAuth, setAttemptedAuth] = useState(false)
-    const [user, setUser] = useState(null)
-    const [admin, setAdmin] = useState(null)
-    useEffect(() => {
-        return auth.onAuthStateChanged(user => {
-            setAttemptedAuth(true)
-            setUser(user)
-            if (!user)
-                navigate('/admin')
-        })
-    }, [])
-    useEffect(() => {
-        if (!user) {
-            setAdmin(null)
-            return
-        }
-        return onSnapshot(doc(db, 'users', user.uid), doc => setAdmin(doc.get('admin') ?? false))
-    }, [user])
+    const [user, admin] = useAuth()
 
     // Page load, waiting for firebase auth to start
-    if (!attemptedAuth)
+    if (user === null)
         return <Center><Spinner /></Center>
     // Nobody logged in currently. Show Login
     if (!user)
@@ -51,8 +34,8 @@ export default function Admin({ }) {
 
     return <div className={styles.admin}>
         <div className={styles.buttons}>
-            <Button onClick={() => navigate('orders')}>Orders?</Button>
-            <Button onClick={() => navigate('products')}>Products?</Button>
+            <Button onClick={() => navigate('orders')}>Orders</Button>
+            <Button onClick={() => navigate('products')}>Products</Button>
             <Spacer />
             <Button onClick={() => signOut(auth)}>Logout</Button>
         </div>

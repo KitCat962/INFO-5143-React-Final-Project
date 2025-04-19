@@ -1,24 +1,36 @@
-import { useOutletContext } from "react-router";
+import { collection, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { db } from "../scripts/firebase";
 
-/**
- * @typedef {Object} CartProductVal
- * @property {string} id
- * @property {integer} count
- */
+export default function useCart(user) {
+    if (user === undefined) throw 'useCart: user is undefined. Did you forget to provide it from useAuth?'
+    const [cart, setCart] = useState([])
+    useEffect(() => user ? onSnapshot(collection(db, 'users', user.uid, 'cart'), collection => setCart(collection.docs.map(doc => doc.data()))) : undefined, [user])
 
-/**
- * @callback TypeSetProduct
- * @param {string} id
- * @param {integer} count
- * @param {boolean?} increment
- * @returns {void}
- */
-
-/**
- * 
- * @returns {[CartProductVal[], TypeSetProduct]}
- */
-export default function useCart() {
-    const { useCart } = useOutletContext()
-    return useCart
+    const setProduct = async (id, count, increment = false) => {
+        if (!user) throw 'useCart (setProduct): Must be authenticated'
+        if (!id) throw 'useCart (setProduct): Missing id'
+        if (count == null) throw 'useCart (setProduct): Missing count'
+        count = parseInt(count, 10)
+        const cartproductIndex = cart.findIndex(cartproduct => cartproduct.id === id)
+        if (cartproductIndex === -1 && count <= 0) return
+        if (cartproductIndex === -1 && count > 0) {
+            await setDoc(doc(db, 'users', user.uid, 'cart', id), { id, count })
+            return
+        }
+        if (count <= 0) {
+            await deleteDoc(doc(db, 'users', user.uid, 'cart', id))
+            return
+        }
+        if (increment)
+            await setDoc(doc(db, 'users', user.uid, 'cart', id), { id, count: cart[cartproductIndex].count + count })
+        else
+            await setDoc(doc(db, 'users', user.uid, 'cart', id), { id, count })
+    }
+    const resetCart = () => {
+        if (!user)
+            throw 'useCart (resetCart): Must be authenticated'
+        return cart.forEach(({ id, count }) => deleteDoc(doc(db, 'users', user.uid, 'cart', id)))
+    }
+    return [cart, setProduct, resetCart]
 }

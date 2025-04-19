@@ -10,10 +10,12 @@ import NumberInput from '../../components/Input/Number'
 import { useState } from 'react'
 import useCart from '../../hooks/UseCart.mjs'
 import Spacer from '../../components/Spacer'
+import useAuth from '../../hooks/useAuth.mjs'
 
 export default function Product({ }) {
     const navigate = useNavigate()
-    const [cart, setProduct] = useCart()
+    const [user] = useAuth()
+    const [cart, setProduct] = useCart(user)
     const { productID } = useParams()
     const product = useProduct(productID)
     const categories = useCategories()

@@ -6,7 +6,7 @@ import CartButton from '../CartButton/CartButton'
 import { useNavigate } from 'react-router'
 import { useState } from 'react'
 
-export default function Header({ useCart }) {
+export default function Header({ }) {
     const navigate = useNavigate()
     const [searchTerm, setSearchTerm] = useState('')
 
@@ -25,7 +25,7 @@ export default function Header({ useCart }) {
         {/* <Spacer /> */}
         <div className={styles.end}>
             <Search value={searchTerm} onEnter={handleSearch} onChange={setSearchTerm} />
-            <CartButton useCart={useCart} />
+            <CartButton />
         </div>
     </header>
 }

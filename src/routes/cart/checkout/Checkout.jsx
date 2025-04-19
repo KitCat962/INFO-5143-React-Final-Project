@@ -15,10 +15,12 @@ import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../../scripts/firebase'
 import useProvinces from '../../../hooks/useProvinces.mjs'
 import Modal from '../../../components/Modal/Modal'
+import useAuth from '../../../hooks/useAuth.mjs'
 
 export default function Checkout({ }) {
     const navigate = useNavigate()
-    const [cart, setProduct, resetCart] = useCart()
+    const [user] = useAuth()
+    const [cart, setProduct, resetCart] = useCart(user)
     const [products, productsMap] = useProducts()
     const provinces = useProvinces()
     const [state, setState] = useState('shipping')
