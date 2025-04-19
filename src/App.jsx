@@ -14,6 +14,8 @@ import AdminProducts from './routes/admin/products/Products'
 import HeaderFooter from './routes/HeaderFooter'
 import Checkout from './routes/cart/checkout/Checkout'
 import Confirmation from './routes/cart/checkout/confirmation/Confirmation'
+import Login from './routes/login/Login'
+import SignUp from './routes/signup/SignUp'
 
 function App() {
   return <BrowserRouter>
@@ -21,6 +23,8 @@ function App() {
       {/* <Route path='/' element={<><Header /><div className = {styles.app-container}><Outlet /></div><Footer /></>}> */}
       <Route path='/' element={<HeaderFooter />}>
         <Route index element={<Root />} />
+        <Route path='login' element={<Login />} />
+        <Route path='signup' element={<SignUp />} />
         <Route path='cart' >
           <Route index element={<Cart />} />
           <Route path='checkout' >

@@ -1,0 +1,27 @@
+$width-cutoff: 600px;
+
+.login {
+    gap: 0.4em;
+    width: 60%;
+    min-width: $width-cutoff;
+    padding: 5em;
+
+    @media screen and (width < $width-cutoff) {
+        width: 100%;
+        min-width: unset;
+    }
+
+    &>form {
+        width: 100%;
+        gap: 0.8em;
+    }
+
+    .errorbox {
+        background-color: var(--negative);
+        color: var(--negative-text);
+        width: 80%;
+        padding: 0.5rem;
+        align-items: center;
+        font-size: 1.2em;
+    }
+}

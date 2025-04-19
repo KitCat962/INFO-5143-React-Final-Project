@@ -27,5 +27,37 @@
         flex-direction: row;
         align-items: center;
         gap: 0.6em;
+
+        .login {
+            font-size: 2em;
+        }
+
+        .usergroup {
+            display: block;
+            height: 100%;
+
+            .user {
+                height: 100%;
+                align-items: center;
+                font-size: 4em;
+
+                &>* {
+                    height: 100%;
+                }
+            }
+
+            .userdropdown {
+                display: none;
+                position: absolute;
+                right: 0;
+                padding-top: 1em;
+            }
+
+            .userdropdown:hover,
+            .user:hover+.userdropdown {
+                display: flex;
+            }
+
+        }
     }
 }

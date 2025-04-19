@@ -9,6 +9,6 @@ export default function useAuth() {
     // null when unattempted, false when not admin, true when admin
     const [admin, setAdmin] = useState(null)
     useEffect(() => onAuthStateChanged(auth, user => setUser(user ?? false)), [])
-    useEffect(() => user ? onSnapshot(doc(db, 'users', user.uid), doc => setAdmin(doc.get('admin') ?? false)) : undefined, [user])
+    useEffect(() => user ? onSnapshot(doc(db, 'users', user.uid), doc => setAdmin(doc.get('admin') ?? false)) : user === false ? setAdmin(false) : undefined, [user])
     return [user, admin]
 }

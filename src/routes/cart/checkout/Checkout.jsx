@@ -7,7 +7,7 @@ import Address, { useAddressTypeDef } from '../../../components/Input/Address'
 import Center from '../../../components/Center'
 import Spacer from '../../../components/Spacer'
 import Checkbox from '../../../components/Input/Checkbox'
-import checkType, { AND, BOOLEAN_ISH, debugType, EMAIL, NULLABLE, NUMBER_ISH, STRING, TRIMED_STRING } from '../../../scripts/formParser.mjs'
+import checkType, { AND, BOOLEAN_ISH, checkInvalid, debugType, EMAIL, NULLABLE, NUMBER_ISH, STRING, TRIMED_STRING } from '../../../scripts/formParser.mjs'
 import useCart from '../../../hooks/UseCart.mjs'
 import useProducts from '../../../hooks/useProducts.mjs'
 import Spinner from '../../../components/Spinner/Spinner'
@@ -77,22 +77,11 @@ export default function Checkout({ }) {
         ...typedefBilling,
     }
     const [invalid, setInvalid] = useState({})
-    const checkInvalid = (value, type) => {
-        const [valid, data] = checkType(type, value)
-        if (valid) return false
-        if (!data) return true
-        if (typeof data !== 'object') return true
-        const subInvalid = {}
-        for (let [field, value] of Object.entries(data)) {
-            subInvalid[field] = checkInvalid(value, type[field])
-        }
-        return subInvalid
-    }
 
     const handleChange = (value, name) => {
         const newFormData = { ...formData, [name]: value }
         setFormData(newFormData)
-        setInvalid({ ...invalid, [name]: checkInvalid(value, typedefAll[name]) })
+        setInvalid({ ...invalid, [name]: checkInvalid(typedefAll[name], value) })
     }
     const handleBillingSameAsShipping = (value, name) => {
         let newFormData = {
@@ -113,9 +102,9 @@ export default function Checkout({ }) {
         }
         setInvalid({
             ...invalid,
-            billingFirstName: checkInvalid(newFormData.billingFirstName, typedefAll.billingFirstName),
-            billingLastName: checkInvalid(newFormData.billingLastName, typedefAll.billingLastName),
-            billingAddress: checkInvalid(newFormData.billingAddress, typedefAll.billingAddress),
+            billingFirstName: checkInvalid(typedefAll.billingFirstName, newFormData.billingFirstName),
+            billingLastName: checkInvalid(typedefAll.billingLastName, newFormData.billingLastName),
+            billingAddress: checkInvalid(typedefAll.billingAddress, newFormData.billingAddress),
         })
     }, [formData.billingSameAsShipping, formData.firstName, formData.lastName, formData.address])
 
@@ -123,14 +112,14 @@ export default function Checkout({ }) {
         if (state === 'shipping') {
             const [valid, _] = checkType(typedefShipping, formData)
             if (!valid) {
-                setInvalid(checkInvalid(formData, typedefShipping))
+                setInvalid(checkInvalid(typedefShipping, formData))
                 return
             }
         }
         if (state === 'billing') {
             const [valid, _] = checkType(typedefBilling, formData)
             if (!valid) {
-                setInvalid(checkInvalid(formData, typedefBilling))
+                setInvalid(checkInvalid(typedefBilling, formData))
                 return
             }
         }
@@ -144,13 +133,13 @@ export default function Checkout({ }) {
             const [shippingValid, shippingParsed] = checkType(typedefShipping, formData)
             if (!shippingValid) {
                 setState('shipping')
-                setInvalid(checkInvalid(formData, typedefShipping))
+                setInvalid(checkInvalid(typedefShipping, formData))
                 return
             }
             const [billingValid, billingParsed] = checkType(typedefBilling, formData)
             if (!billingValid) {
                 setState('shipping')
-                setInvalid(checkInvalid(formData, typedefBilling))
+                setInvalid(checkInvalid(typedefBilling, formData))
                 return
             }
             // one of the above should have worked
@@ -160,7 +149,7 @@ export default function Checkout({ }) {
         }
         try {
             await addDoc(collection(db, 'orders'), {
-                userUID: null,
+                userUID: user.uid,
                 products: cart,
                 // yes I know card data is being thrown here unencrypted. I dont care right now
                 ...formParsed

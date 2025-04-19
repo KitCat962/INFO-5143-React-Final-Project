@@ -82,3 +82,15 @@ export function debugType(type, path = '') {
     }
     return DEFAULT(deftypeDebug, `${path}_null`)
 }
+
+export function checkInvalid(type, value) {
+    const [valid, data] = checkType(type, value)
+    if (valid) return false
+    if (!data) return true
+    if (typeof data !== 'object') return true
+    const subInvalid = {}
+    for (let [field, value] of Object.entries(data)) {
+        subInvalid[field] = checkInvalid(type[field], value)
+    }
+    return subInvalid
+}

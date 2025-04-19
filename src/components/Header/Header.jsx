@@ -1,13 +1,18 @@
 import styles from './Header.module.scss'
 import logo from '../../assets/logo.webp'
-import Spacer from '../Spacer'
 import Search from '../Input/Search'
 import CartButton from '../CartButton/CartButton'
-import { useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { useState } from 'react'
+import useAuth from '../../hooks/useAuth.mjs'
+import Button from '../Buttons/Button'
+import { FaRegUserCircle } from 'react-icons/fa'
+import { signOut } from 'firebase/auth'
+import { auth } from '../../scripts/firebase'
 
 export default function Header({ }) {
     const navigate = useNavigate()
+    const [user, admin] = useAuth()
     const [searchTerm, setSearchTerm] = useState('')
 
     const handleSearch = term => {
@@ -26,6 +31,18 @@ export default function Header({ }) {
         <div className={styles.end}>
             <Search value={searchTerm} onEnter={handleSearch} onChange={setSearchTerm} />
             <CartButton />
+            {user ?
+                <div className={styles.usergroup}>
+                    <div className={styles.user}>
+                        <FaRegUserCircle />
+                    </div>
+                    <div className={styles.userdropdown}>
+                        {admin && <Button onClick={() => navigate('/admin')}>Admin</Button>}
+                        <Button onClick={() => signOut(auth)}>Logout</Button>
+                    </div>
+                </div>
+                : <Link to='/login' className={styles.login}>Login</Link>
+            }
         </div>
     </header>
 }

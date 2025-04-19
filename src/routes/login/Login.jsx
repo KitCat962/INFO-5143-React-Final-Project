@@ -5,8 +5,10 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../scripts/firebase'
 import Center from '../../components/Center'
 import Text from '../../components/Input/Text'
+import { Link, useNavigate } from 'react-router'
 
 export default function Login({ }) {
+    const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(false)
@@ -18,7 +20,7 @@ export default function Login({ }) {
         try {
             setError(false)
             const response = await signInWithEmailAndPassword(auth, email, password)
-            //AuthWrapper will move to the dashboard here
+            navigate('/')
         } catch {
             setError(true)
         } finally {
@@ -26,14 +28,13 @@ export default function Login({ }) {
         }
     }
     return <Center className={styles.login}>
-        <div style={{ flexGrow: 1 }} />
-        <h1>Admin Login</h1>
+        <h1>Login</h1>
         <form onSubmit={handleSubmit}>
-            <Text name='Email' email value={email} onChange={setEmail} />
-            <Text name='Password' password value={password} onChange={setPassword} />
+            <Text formName='email' label='Email' email value={email} onChange={setEmail} />
+            <Text formName='password' label='Password' password value={password} onChange={setPassword} />
             <Button disabled={loading} submit>Login</Button>
         </form>
         {error && <p className={styles.errorbox}>Invalid Credentials</p>}
-        <div style={{ flexGrow: 1 }} />
+        <p>Not already a user? <Link to='/signup'>Sign Up</Link></p>
     </Center>
 }
