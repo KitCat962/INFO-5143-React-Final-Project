@@ -28,25 +28,25 @@ export default function Orders({ }) {
             order.billingLastName.toLowerCase().includes(searchTerm.toLowerCase())
         )
 
-    const [deleteOrder, setDeleteOrder] = useState(null)
-    const handleDelete = () => {
-        if (!deleteOrder)
-            return
-        deleteDoc(doc(db, 'orders', deleteOrder.id))
-        setDeleteOrder(null)
-    }
-    const renderModal = () => <Modal visible={!!deleteOrder} requestClose={() => setDeleteOrder(null)}>
-        <div style={{ padding: '1em', gap: '1em' }}>
-            <h2>Are you sure you want to delete {deleteOrder?.name}?</h2>
-            <div style={{ flexDirection: 'row', justifyContent: 'end', gap: '0.5em' }}>
-                <Button type='negative' onClick={handleDelete}>Delete</Button>
-                <Button type='tertiary' onClick={() => setDeleteOrder(null)}>Cancel</Button>
-            </div>
-        </div>
-    </Modal>
+    // const [deleteOrder, setDeleteOrder] = useState(null)
+    // const handleDelete = () => {
+    //     if (!deleteOrder)
+    //         return
+    //     deleteDoc(doc(db, 'orders', deleteOrder.id))
+    //     setDeleteOrder(null)
+    // }
+    // const renderModal = () => <Modal visible={!!deleteOrder} requestClose={() => setDeleteOrder(null)}>
+    //     <div style={{ padding: '1em', gap: '1em' }}>
+    //         <h2>Are you sure you want to delete {deleteOrder?.name}?</h2>
+    //         <div style={{ flexDirection: 'row', justifyContent: 'end', gap: '0.5em' }}>
+    //             <Button type='negative' onClick={handleDelete}>Delete</Button>
+    //             <Button type='tertiary' onClick={() => setDeleteOrder(null)}>Cancel</Button>
+    //         </div>
+    //     </div>
+    // </Modal>
 
     return <>
-        {renderModal()}
+        {/* {renderModal()} */}
         <div className={styles.orders}>
             <div className={styles.header}>
                 <p className={styles.title}>Orders</p>
