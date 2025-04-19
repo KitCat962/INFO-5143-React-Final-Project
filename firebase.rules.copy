@@ -19,6 +19,10 @@ service cloud.firestore {
     match /users/{user} {
       allow read: if isSelf(user) || isAdmin();
       allow write: if (isSelf(user) || isAdmin()) && !updatingAdminField();
+      match /cart/{product} {
+      	allow read: if isSelf(user) || isAdmin();
+      	allow write: if isSelf(user) || isAdmin();
+      }
     }
     match /product_data/{field} {
     	allow read: if true;
