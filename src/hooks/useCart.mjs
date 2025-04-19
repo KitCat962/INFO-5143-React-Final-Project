@@ -5,7 +5,7 @@ import { db } from "../scripts/firebase";
 export default function useCart(user) {
     if (user === undefined) throw 'useCart: user is undefined. Did you forget to provide it from useAuth?'
     const [cart, setCart] = useState([])
-    useEffect(() => user ? onSnapshot(collection(db, 'users', user.uid, 'cart'), collection => setCart(collection.docs.map(doc => doc.data()))) : undefined, [user])
+    useEffect(() => user ? onSnapshot(collection(db, 'users', user.uid, 'cart'), collection => setCart(collection.docs.map(doc => doc.data()))) : setCart([]), [user])
 
     const setProduct = async (id, count, increment = false) => {
         if (!user) throw 'useCart (setProduct): Must be authenticated'

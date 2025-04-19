@@ -1,5 +1,5 @@
 import styles from './Admin.module.scss'
-import { useNavigate } from 'react-router'
+import { Outlet, useNavigate } from 'react-router'
 import Button from '../../components/Buttons/Button'
 import Spinner from '../../components/Spinner/Spinner'
 import Center from '../../components/Center'

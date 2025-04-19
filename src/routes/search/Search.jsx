@@ -3,7 +3,7 @@ import SearchInput from '../../components/Input/Search'
 import Select from '../../components/Input/Select'
 import ProductTile from './ProductTile/ProductTile'
 import useCategories from '../../hooks/useCategories.mjs'
-import useProducts from '../../hooks/useProducts.mjs'
+import useProductsFilter from '../../hooks/useProductsFilter.mjs'
 import styles from './Search.module.scss'
 import { useSearchParams } from "react-router"
 import Checkbox from '../../components/Input/Checkbox'
@@ -25,7 +25,7 @@ export default function Search({ }) {
         max = Number.isNaN(searchParams.get('max')) ? '' : searchParams.get('max'),
         orderBy = searchParams.get('orderBy'),
         desc = searchParams.get('desc') && searchParams.get('desc') === 'true' ? true : false
-    const [products, productMap] = useProducts({ category, min, max, orderBy, desc })
+    const products = useProductsFilter({ category, min, max, orderBy, desc })
     const categories = useCategories(true)
 
     // So, apperently firebase does not allow searching fields by substring?

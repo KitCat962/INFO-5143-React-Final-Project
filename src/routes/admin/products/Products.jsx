@@ -2,22 +2,22 @@ import { useNavigate } from 'react-router'
 import Button from '../../../components/Buttons/Button'
 import Spacer from '../../../components/Spacer'
 import styles from './Products.module.scss'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Spinner from '../../../components/Spinner/Spinner'
 import Center from '../../../components/Center'
-import { collection, deleteDoc, doc, onSnapshot, query, where } from 'firebase/firestore'
+import { deleteDoc, doc } from 'firebase/firestore'
 import { db } from '../../../scripts/firebase'
 import Search from '../../../components/Input/Search'
 import Modal from '../../../components/Modal/Modal'
 import Select from '../../../components/Input/Select'
 import useCategories from '../../../hooks/useCategories.mjs'
-import useProducts from '../../../hooks/useProducts.mjs'
+import useProductsFilter from '../../../hooks/useProductsFilter.mjs'
 
 export default function Products({ }) {
     const navigate = useNavigate()
     const [searchTerm, setSearchTerm] = useState('')
     const [searchCategory, setSearchCategory] = useState('all')
-    const [products, productMap] = useProducts({ category: searchCategory })
+    const products = useProductsFilter({ category: searchCategory })
     const categories = useCategories(true)
     // So, apperently firebase does not allow searching fields by substring?
     // Very frustrating. Guess I gotta do it clientside

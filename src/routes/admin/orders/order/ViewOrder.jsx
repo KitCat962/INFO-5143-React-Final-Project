@@ -5,7 +5,7 @@ import Spinner from "../../../../components/Spinner/Spinner"
 import Button from "../../../../components/Buttons/Button"
 import styles from './ViewOrder.module.scss'
 import useProvinces from "../../../../hooks/useProvinces.mjs"
-import useProducts from "../../../../hooks/useProducts.mjs"
+import useProductMap from "../../../../hooks/useProductMap.mjs"
 import Dollar from "../../../../components/Dollar"
 
 export default function ViewOrder({ }) {
@@ -13,7 +13,7 @@ export default function ViewOrder({ }) {
     const { orderID } = useParams()
     const order = useOrder(orderID)
     const provinces = useProvinces()
-    const [products, productMap] = useProducts()
+    const productMap = useProductMap()
     const calculateSubtotal = () => order && productMap ? order.products.reduce((sum, { id, count }) => sum + productMap[id].price * count, 0) : 0
     if (order === null) return <Center><Spinner /></Center>
     if (order === false) return <Center><div className={styles.noorder}>
