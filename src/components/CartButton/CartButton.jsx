@@ -2,7 +2,8 @@ import { FaShoppingCart } from 'react-icons/fa'
 import styles from './CartButton.module.scss'
 import { useNavigate } from 'react-router'
 import useAuth from '../../hooks/useAuth.mjs'
-import useCart from '../../hooks/UseCart.mjs'
+import useCart from '../../hooks/useCart.mjs'
+import Spinner from '../Spinner/Spinner'
 
 export default function CartButton({ }) {
     const [user] = useAuth()
@@ -12,9 +13,13 @@ export default function CartButton({ }) {
     return <div className={styles.cart} onClick={() => navigate('/cart')}>
         <div className={styles.iconbox}>
             <div className={styles.icon}><FaShoppingCart /></div>
-            {cart.length > 0 && <span className={styles.number}>
-                {cartCount()}
-            </span>}
+            {
+                cart === null ?
+                    <span className={styles.number}><Spinner /></span> :
+                    cart && cart.length > 0 ?
+                        <span className={styles.number}>{cartCount()}</span> :
+                        null
+            }
         </div>
         <span className={styles.label}>Cart</span>
     </div >

@@ -4,11 +4,12 @@ import { db } from "../scripts/firebase";
 
 export default function useCart(user) {
     if (user === undefined) throw 'useCart: user is undefined. Did you forget to provide it from useAuth?'
-    const [cart, setCart] = useState([])
-    useEffect(() => user ? onSnapshot(collection(db, 'users', user.uid, 'cart'), collection => setCart(collection.docs.map(doc => doc.data()))) : setCart([]), [user])
+    const [cart, setCart] = useState(null)
+    useEffect(() => user ? onSnapshot(collection(db, 'users', user.uid, 'cart'), collection => setCart(collection.docs.map(doc => doc.data()))) : setCart(false), [user])
 
     const setProduct = async (id, count, increment = false) => {
         if (!user) throw 'useCart (setProduct): Must be authenticated'
+        if (!cart) throw 'useCart (setProduct): Wait for the cart to be loaded before trying to set anything'
         if (!id) throw 'useCart (setProduct): Missing id'
         if (count == null) throw 'useCart (setProduct): Missing count'
         count = parseInt(count, 10)
@@ -28,8 +29,8 @@ export default function useCart(user) {
             await setDoc(doc(db, 'users', user.uid, 'cart', id), { id, count })
     }
     const resetCart = () => {
-        if (!user)
-            throw 'useCart (resetCart): Must be authenticated'
+        if (!user) throw 'useCart (resetCart): Must be authenticated'
+        if (!cart) throw 'useCart (resetCart): Wait for the cart to be loaded before trying to set anything'
         return cart.forEach(({ id, count }) => deleteDoc(doc(db, 'users', user.uid, 'cart', id)))
     }
     return [cart, setProduct, resetCart]

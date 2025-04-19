@@ -8,7 +8,7 @@ import Center from '../../../components/Center'
 import Spacer from '../../../components/Spacer'
 import Checkbox from '../../../components/Input/Checkbox'
 import checkType, { AND, BOOLEAN_ISH, checkInvalid, debugType, EMAIL, NULLABLE, NUMBER_ISH, STRING, TRIMED_STRING } from '../../../scripts/formParser.mjs'
-import useCart from '../../../hooks/UseCart.mjs'
+import useCart from '../../../hooks/useCart.mjs'
 import useProductMap from '../../../hooks/useProductMap.mjs'
 import Spinner from '../../../components/Spinner/Spinner'
 import { addDoc, collection } from 'firebase/firestore'
@@ -21,6 +21,11 @@ export default function Checkout({ }) {
     const navigate = useNavigate()
     const [user] = useAuth()
     const [cart, setProduct, resetCart] = useCart(user)
+    // prevent users without a cart from accessing checkout
+    useEffect(() => {
+        if (user === false || cart && cart.length === null)
+            navigate(-1)
+    }, [user, cart])
     const productsMap = useProductMap()
     const provinces = useProvinces()
     const [state, setState] = useState('shipping')

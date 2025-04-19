@@ -8,7 +8,7 @@ import useCategories from '../../hooks/useCategories.mjs'
 import Dollar from '../../components/Dollar'
 import NumberInput from '../../components/Input/Number'
 import { useState } from 'react'
-import useCart from '../../hooks/UseCart.mjs'
+import useCart from '../../hooks/useCart.mjs'
 import useAuth from '../../hooks/useAuth.mjs'
 
 export default function Product({ }) {
@@ -50,7 +50,7 @@ export default function Product({ }) {
                 increment={1}
                 min={1}
             />
-            {user ? <Button onClick={addToCart}>Add To Cart</Button> : <Button disabled>Add to Cart<br />Must be Logged In</Button>}
+            {user && cart ? <Button onClick={addToCart}>Add To Cart</Button> : <Button disabled>Add to Cart<br />Must be Logged In</Button>}
 
         </div>
     </div>
