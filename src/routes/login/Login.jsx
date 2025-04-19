@@ -22,8 +22,7 @@ export default function Login({ }) {
             setError(false)
             const response = await signInWithEmailAndPassword(auth, email, password)
             navigate(state?.prevLocation ?? '/')
-        } catch (e) {
-            console.log(e)
+        } catch {
             setError(true)
         } finally {
             setLoading(false)
