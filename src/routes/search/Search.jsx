@@ -7,6 +7,8 @@ import useProducts from '../../hooks/useProducts.mjs'
 import styles from './Search.module.scss'
 import { useSearchParams } from "react-router"
 import Checkbox from '../../components/Input/Checkbox'
+import Spinner from '../../components/Spinner/Spinner'
+import Center from '../../components/Center'
 
 export default function Search({ }) {
     const [searchParams, setSearchParams] = useSearchParams({
@@ -89,14 +91,14 @@ export default function Search({ }) {
             />
         </div>
         <div className={styles.productlist}>
-            {products && filterSearch(products).map(product => <ProductTile
+            {products ? filterSearch(products).map(product => <ProductTile
                 key={product.id}
                 id={product.id}
                 name={product.name}
                 price={product.price}
                 image={product.image}
             />
-            )}
+            ) : <Center><Spinner /></Center>}
         </div>
     </div>
 }
