@@ -5,10 +5,11 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../scripts/firebase'
 import Center from '../../components/Center'
 import Text from '../../components/Input/Text'
-import { Link, useNavigate } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 
 export default function Login({ }) {
     const navigate = useNavigate()
+    const { state: { prevLocation = '/' } } = useLocation()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(false)
@@ -20,7 +21,7 @@ export default function Login({ }) {
         try {
             setError(false)
             const response = await signInWithEmailAndPassword(auth, email, password)
-            navigate('/')
+            navigate(prevLocation)
         } catch {
             setError(true)
         } finally {
@@ -35,6 +36,6 @@ export default function Login({ }) {
             <Button disabled={loading} submit>Login</Button>
         </form>
         {error && <p className={styles.errorbox}>Invalid Credentials</p>}
-        <p>Not already a user? <Link to='/signup'>Sign Up</Link></p>
+        <p>Not already a user? <Link to='/signup' state={{ prevLocation }}>Sign Up</Link></p>
     </Center>
 }
