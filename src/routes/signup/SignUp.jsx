@@ -6,13 +6,14 @@ import { auth } from '../../scripts/firebase'
 import Center from '../../components/Center'
 import Text from '../../components/Input/Text'
 import checkType, { AND, checkInvalid, EMAIL, STRING } from '../../scripts/formParser.mjs'
-import { Link, useNavigate } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 
 // 8 characters, one letter, one number
 // https://stackoverflow.com/a/21456918/25120582
 const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
 export default function SignUp({ }) {
     const navigate = useNavigate()
+    const { state } = useLocation()
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -43,7 +44,7 @@ export default function SignUp({ }) {
         try {
             setError(false)
             await createUserWithEmailAndPassword(auth, formParsed.email, formParsed.password)
-            navigate('/')
+            navigate(state?.prevLocation)
         } catch (e) {
             Object.entries(e).forEach(console.log)
             switch (e.code) {
@@ -78,6 +79,6 @@ export default function SignUp({ }) {
             <Button disabled={loading} submit>Login</Button>
         </form>
         {error && <p className={styles.errorbox}>{error}</p>}
-        <p>Already a user? <Link to='/login'>Login</Link></p>
+        <p>Already a user? <Link to='/login' state={state}>Login</Link></p>
     </Center>
 }

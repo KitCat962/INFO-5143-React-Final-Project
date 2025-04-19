@@ -2,7 +2,7 @@ import styles from './Header.module.scss'
 import logo from '../../assets/logo.webp'
 import Search from '../Input/Search'
 import CartButton from '../CartButton/CartButton'
-import { Link, useNavigate } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 import { useState } from 'react'
 import useAuth from '../../hooks/useAuth.mjs'
 import Button from '../Buttons/Button'
@@ -12,6 +12,7 @@ import { auth } from '../../scripts/firebase'
 
 export default function Header({ }) {
     const navigate = useNavigate()
+    const { pathname = '/' } = useLocation()
     const [user, admin] = useAuth()
     const [searchTerm, setSearchTerm] = useState('')
 
@@ -41,7 +42,7 @@ export default function Header({ }) {
                         <Button onClick={() => signOut(auth)}>Logout</Button>
                     </div>
                 </div>
-                : <Link to='/login' className={styles.login}>Login</Link>
+                : <Link to='/login' state={{ prevLocation: pathname }} className={styles.login}>Login</Link>
             }
         </div>
     </header>
