@@ -12,9 +12,9 @@ export default function useCart(user) {
         if (!id) throw 'useCart (setProduct): Missing id'
         if (count == null) throw 'useCart (setProduct): Missing count'
         count = parseInt(count, 10)
-        const cartproductIndex = cart.findIndex(cartproduct => cartproduct.id === id)
-        if (cartproductIndex === -1 && count <= 0) return
-        if (cartproductIndex === -1 && count > 0) {
+        const cartproduct = cart.find(cartproduct => cartproduct.id === id)
+        if (!cartproduct && count <= 0) return
+        if (!cartproduct && count > 0) {
             await setDoc(doc(db, 'users', user.uid, 'cart', id), { id, count })
             return
         }
@@ -23,7 +23,7 @@ export default function useCart(user) {
             return
         }
         if (increment)
-            await setDoc(doc(db, 'users', user.uid, 'cart', id), { id, count: cart[cartproductIndex].count + count })
+            await setDoc(doc(db, 'users', user.uid, 'cart', id), { id, count: cartproduct.count + count })
         else
             await setDoc(doc(db, 'users', user.uid, 'cart', id), { id, count })
     }
