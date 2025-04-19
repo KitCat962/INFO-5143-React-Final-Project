@@ -50,7 +50,8 @@ export default function Product({ }) {
                 increment={1}
                 min={1}
             />
-            <Button onClick={addToCart}>Add To Cart</Button>
+            {user ? <Button onClick={addToCart}>Add To Cart</Button> : <Button disabled>Add to Cart<br />Must be Logged In</Button>}
+
         </div>
     </div>
 }
