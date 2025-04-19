@@ -82,7 +82,7 @@ export default function Orders({ }) {
                     </div>}
                     <div>
                         <Button type='tertiary' onClick={() => navigate(order.id)}>View</Button>
-                        <Button type='negative' onClick={() => setDeleteProduct(order)}>Delete</Button>
+                        {/* <Button type='negative' onClick={() => setDeleteProduct(order)}>Delete</Button> */}
                     </div>
                 </div>) : <Center><Spinner /></Center>}
             </div>
