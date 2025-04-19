@@ -34,10 +34,10 @@ export default function NumberInput({ formName, className, label, hint, value, o
                 step={step}
             />
             <div className={styles.buttongroup}>
-                <Button className={styles.squish} onClick={() => handleIncrement(step)}>
+                <Button className={styles.squish} onClick={() => handleIncrement(increment)}>
                     <FaChevronUp />
                 </Button>
-                <Button className={styles.squish} onClick={() => handleIncrement(-step)}>
+                <Button className={styles.squish} onClick={() => handleIncrement(-increment)}>
                     <FaChevronDown />
                 </Button>
             </div>

@@ -6,19 +6,24 @@ import useCategories from '../../hooks/useCategories.mjs'
 import useProducts from '../../hooks/useProducts.mjs'
 import styles from './Search.module.scss'
 import { useSearchParams } from "react-router"
+import Checkbox from '../../components/Input/Checkbox'
 
 export default function Search({ }) {
     const [searchParams, setSearchParams] = useSearchParams({
         term: '',
         category: 'all',
         min: '',
-        max: ''
+        max: '',
+        orderBy: 'name',
+        desc: false
     })
     const term = searchParams.get('term'),
         category = searchParams.get('category'),
-        min = Number.isNaN(+searchParams.get('min')) ? '' : searchParams.get('min'),
-        max = Number.isNaN(+searchParams.get('max')) ? '' : searchParams.get('max')
-    const [products, productMap] = useProducts({ category, min, max })
+        min = Number.isNaN(searchParams.get('min')) ? '' : searchParams.get('min'),
+        max = Number.isNaN(searchParams.get('max')) ? '' : searchParams.get('max'),
+        orderBy = searchParams.get('orderBy'),
+        desc = searchParams.get('desc') && searchParams.get('desc') === 'true' ? true : false
+    const [products, productMap] = useProducts({ category, min, max, orderBy, desc })
     const categories = useCategories(true)
 
     // So, apperently firebase does not allow searching fields by substring?
@@ -32,7 +37,7 @@ export default function Search({ }) {
 
     const handleChange = (value, name) => {
         const newParams = new URLSearchParams({
-            term, category, min, max,
+            term, category, min, max, orderBy, desc,
             [name]: value
         })
         setSearchParams(newParams)
@@ -52,6 +57,7 @@ export default function Search({ }) {
                 onChange={handleChange}
                 min={0}
                 step={0.01}
+                increment={1}
             />
             <NumberInput formName='max'
                 label='Maximum Price'
@@ -59,6 +65,27 @@ export default function Search({ }) {
                 onChange={handleChange}
                 min={0}
                 step={0.01}
+                increment={1}
+            />
+            <Select formName='orderBy'
+                label='Order By'
+                value={orderBy}
+                onChange={handleChange}
+                options={[
+                    {
+                        id: 'name',
+                        label: 'Name'
+                    },
+                    {
+                        id: 'price',
+                        label: 'Price'
+                    },
+                ]}
+            />
+            <Checkbox formName='desc'
+                label='Sort Descending'
+                value={desc}
+                onChange={handleChange}
             />
         </div>
         <div className={styles.productlist}>
