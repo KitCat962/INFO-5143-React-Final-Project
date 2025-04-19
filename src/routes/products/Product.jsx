@@ -9,7 +9,6 @@ import Dollar from '../../components/Dollar'
 import NumberInput from '../../components/Input/Number'
 import { useState } from 'react'
 import useCart from '../../hooks/UseCart.mjs'
-import Spacer from '../../components/Spacer'
 import useAuth from '../../hooks/useAuth.mjs'
 
 export default function Product({ }) {
