@@ -13,12 +13,8 @@ export default function CartButton({ }) {
     return <div className={styles.cart} onClick={() => navigate('/cart')}>
         <div className={styles.iconbox}>
             <div className={styles.icon}><FaShoppingCart /></div>
-            {
-                cart === null ?
-                    <span className={styles.number}><Spinner /></span> :
-                    cart && cart.length > 0 ?
-                        <span className={styles.number}>{cartCount()}</span> :
-                        null
+            {cart && cart.length > 0 &&
+                <span className={styles.number}>{cartCount()}</span>
             }
         </div>
         <span className={styles.label}>Cart</span>

@@ -23,11 +23,14 @@ export default function Product({ }) {
         setProduct(productID, count, true)
         setCount(1)
     }
+
     if (product === null) return <Center><Spinner /></Center>
+
     if (product === false) return <Center><div className={styles.noproduct}>
         No Product exists with ID {productID}
         <Button onClick={() => navigate(-1)}>Go Back</Button>
     </div></Center>
+
     return <div className={styles.product}>
         <div className={styles.imagecontainer}>
             <div className={styles.imagecontainer2}>
@@ -50,8 +53,10 @@ export default function Product({ }) {
                 increment={1}
                 min={1}
             />
-            {user && cart ? <Button onClick={addToCart}>Add To Cart</Button> : <Button disabled>Add to Cart<br />Must be Logged In</Button>}
-
+            {user && cart ?
+                <Button onClick={addToCart}>Add To Cart</Button> :
+                <Button disabled>Add to Cart<br />Must be Logged In</Button>
+            }
         </div>
     </div>
 }

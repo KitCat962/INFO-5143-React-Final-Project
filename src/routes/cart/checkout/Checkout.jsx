@@ -88,29 +88,22 @@ export default function Checkout({ }) {
         setFormData(newFormData)
         setInvalid({ ...invalid, [name]: checkInvalid(typedefAll[name], value) })
     }
-    const handleBillingSameAsShipping = (value, name) => {
-        let newFormData = {
-            ...formData,
-            [name]: value,
-        }
-        setFormData(newFormData)
-    }
     useEffect(() => {
-        let newFormData = {
-            ...formData,
-            billingFirstName: formData.firstName,
-            billingLastName: formData.lastName,
-            billingAddress: formData.address
-        }
         if (formData.billingSameAsShipping) {
+            let newFormData = {
+                ...formData,
+                billingFirstName: formData.firstName,
+                billingLastName: formData.lastName,
+                billingAddress: formData.address
+            }
             setFormData(newFormData)
+            setInvalid({
+                ...invalid,
+                billingFirstName: checkInvalid(typedefAll.billingFirstName, newFormData.billingFirstName),
+                billingLastName: checkInvalid(typedefAll.billingLastName, newFormData.billingLastName),
+                billingAddress: checkInvalid(typedefAll.billingAddress, newFormData.billingAddress),
+            })
         }
-        setInvalid({
-            ...invalid,
-            billingFirstName: checkInvalid(typedefAll.billingFirstName, newFormData.billingFirstName),
-            billingLastName: checkInvalid(typedefAll.billingLastName, newFormData.billingLastName),
-            billingAddress: checkInvalid(typedefAll.billingAddress, newFormData.billingAddress),
-        })
     }, [formData.billingSameAsShipping, formData.firstName, formData.lastName, formData.address])
 
     const handleNext = next => {
@@ -260,7 +253,7 @@ export default function Checkout({ }) {
                 className={styles.billingSameAsShipping}
                 label='Same as Shipping Address'
                 value={formData.billingSameAsShipping}
-                onChange={handleBillingSameAsShipping}
+                onChange={handleChange}
             />
             <div className={styles.row}>
                 <Text formName='billingFirstName'
