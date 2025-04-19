@@ -47,3 +47,4 @@ export default function Header({ }) {
         </div>
     </header>
 }
+//signOut(auth).then(() => console.log('signout success')).catch(e => console.log('signout fail', e)).finally(() => console.log('signout end'))

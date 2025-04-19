@@ -20,7 +20,7 @@
         justify-content: center;
         background-color: var(--secondary);
         color: var(--secondary-text);
-        max-height: max-content;
+        // max-height: max-content;
 
         .imagecontainer2 {
             padding: 2em;
@@ -30,6 +30,7 @@
             height: 100%;
             align-items: center;
             justify-content: center;
+            width: 100%;
 
             .image {
                 padding: 2em;
