@@ -19,7 +19,7 @@ export default function Product({ }) {
     const categories = useCategories()
     const [count, setCount] = useState(1)
     const addToCart = () => {
-        setProduct(productID, count)
+        setProduct(productID, count, true)
         setCount(1)
     }
     if (product === null) return <Center><Spinner /></Center>

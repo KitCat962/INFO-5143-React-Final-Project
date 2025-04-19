@@ -10,6 +10,7 @@ import { useOutletContext } from "react-router";
  * @callback TypeSetProduct
  * @param {string} id
  * @param {integer} count
+ * @param {boolean?} increment
  * @returns {void}
  */
 
