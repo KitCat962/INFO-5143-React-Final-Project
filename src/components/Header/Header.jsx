@@ -4,9 +4,19 @@ import Spacer from '../Spacer'
 import Search from '../Input/Search'
 import CartButton from '../CartButton/CartButton'
 import { useNavigate } from 'react-router'
+import { useState } from 'react'
 
 export default function Header({ useCart }) {
     const navigate = useNavigate()
+    const [searchTerm, setSearchTerm] = useState('')
+
+    const handleSearch = term => {
+        if (term && term.trim().length) {
+            navigate(`/search?${new URLSearchParams({ term })}`)
+            setSearchTerm('')
+        }
+    }
+
     return <header className={styles.header}>
         <div className={styles.start} onClick={() => navigate('/')}>
             <img className={styles.logo} src={logo} />
@@ -14,7 +24,7 @@ export default function Header({ useCart }) {
         </div>
         {/* <Spacer /> */}
         <div className={styles.end}>
-            <Search />
+            <Search value={searchTerm} onEnter={handleSearch} onChange={setSearchTerm} />
             <CartButton useCart={useCart} />
         </div>
     </header>

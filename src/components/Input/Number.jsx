@@ -11,7 +11,7 @@ export default function NumberInput({ formName, className, label, hint, value, o
 
     const handleIncrement = increment => {
         let newValue = Math.round((parseFloat(value) + increment) / step) * step
-        if (Number.isNaN(newValue) || !Number.isFinite(newValue)) value = 0
+        if (Number.isNaN(newValue) || !Number.isFinite(newValue)) newValue = 0
         if (min != null && newValue < min)
             newValue = min
         else if (max != null && newValue > max)

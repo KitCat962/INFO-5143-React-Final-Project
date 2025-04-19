@@ -16,8 +16,8 @@ export default function Search({ }) {
     })
     const term = searchParams.get('term'),
         category = searchParams.get('category'),
-        min = searchParams.get('min'),
-        max = searchParams.get('max')
+        min = Number.isNaN(+searchParams.get('min')) ? '' : searchParams.get('min'),
+        max = Number.isNaN(+searchParams.get('max')) ? '' : searchParams.get('max')
     const [products, productMap] = useProducts({ category, min, max })
     const categories = useCategories(true)
 
